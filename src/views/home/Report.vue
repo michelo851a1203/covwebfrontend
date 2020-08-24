@@ -44,10 +44,10 @@
     <section class="mt-10 w-full mb-2 flex justify-around">
       <button
         class="w-1/3 bg-gray-700 focus:outline-none hover:bg-gray-900 text-white font-medium py-2 px-4 rounded"
-      >重填</button>
+      >返回</button>
       <button
         class="w-1/3 bg-green-700 focus:outline-none hover:bg-green-900 text-white font-medium py-2 px-4 rounded"
-      >送出</button>
+      >確認</button>
     </section>
   </div>
 </template>
