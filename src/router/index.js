@@ -2,14 +2,22 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 
 const routes = [
-  // {
-  //   path: '*',
-  //   redirect: '/'
-  // },
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    children: [
+      {
+        path: '/',
+        component: () => import(/* webpackChunkName: "Index" */ '../views/home/Index.vue'),
+        meta: { authRequired: true }
+      },
+      {
+        path: '/report',
+        component: () => import(/* webpackChunkName: "Report" */ '../views/home/Report.vue'),
+        meta: { authRequired: true }
+      },
+    ]
   },
   {
     path: '/signIn',
