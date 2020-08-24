@@ -8,6 +8,14 @@ export default function Login() {
         password: "",
         storageToken: "",
     })
+
+    const registerList = reactive({
+        registerUser: "",
+        registerPassword: "",
+        registerEmail: "",
+        registerDisplayName: ""
+    })
+
     const login = async () => {
         const response = await LoginModules.login(loginList.user, loginList.password)
         if (response.success !== true) {
@@ -20,6 +28,17 @@ export default function Login() {
         localStorage.setItem(cluster, token)
         loginList.storageToken = token
     }
+
+    const register = async () => {
+        const response = await LoginModules.register(registerList.user, registerList.password, registerList.registerEmail, registerList.registerDisplayName)
+        if (response.success !== true) {
+            console.error("register error");
+            return false
+        }
+        refill()
+        return true
+    }
+
     const clearToken = () => {
         const cluster = localStorage.getItem("covWebItem")
         const token = localStorage.getItem(cluster)
@@ -33,5 +52,13 @@ export default function Login() {
             loginList.storageToken = ""
         }
     }
-    return { ...toRefs(loginList), login, clearToken }
+
+    const refill = () => {
+        registerList.registerUser = ""
+        registerList.registerPassword = ""
+        registerList.registerEmail = ""
+        registerList.registerDisplayName = ""
+    }
+
+    return { ...toRefs(loginList), ...toRefs(registerList), login, clearToken, refill, register }
 }

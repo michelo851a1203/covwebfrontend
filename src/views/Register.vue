@@ -1,12 +1,88 @@
 <template>
-  <div>AAA</div>
+  <div class="register bg-green-600">
+    <div
+      class="registercontent flex items-center flex-col py-12 shadow-2xl rounded mx-auto bg-white"
+    >
+      <div class="self-start ml-10 mb-4">
+        <label>檢驗中心註冊</label>
+      </div>
+      <div class="mb-4">
+        <input
+          v-model.lazy.trim="registerUser"
+          class="border-b-2 border-gray-400 px-4 pt-1 focus:outline-none"
+          placeholder="輸入帳號..."
+          type="text"
+        />
+      </div>
+      <div class="mb-4">
+        <input
+          v-model.lazy.trim="registerPassword"
+          class="border-b-2 border-gray-400 px-4 pt-1 focus:outline-none"
+          placeholder="輸入密碼..."
+          type="password"
+        />
+      </div>
+      <div class="mb-4">
+        <input
+          v-model.lazy.trim="registerEmail"
+          class="border-b-2 border-gray-400 px-4 pt-1 focus:outline-none"
+          placeholder="信箱..."
+          type="text"
+        />
+      </div>
+      <div class="mb-4">
+        <input
+          v-model.lazy.trim="registerDisplayName"
+          class="border-b-2 border-gray-400 px-4 pt-1 focus:outline-none"
+          placeholder="顯示名稱..."
+          type="text"
+        />
+      </div>
+      <div class="w-4/5 mb-2 flex justify-around">
+        <button
+          @click="registerFunc"
+          class="bg-gray-700 focus:outline-none hover:bg-gray-900 text-white font-medium py-2 px-4 rounded"
+        >重填</button>
+        <button
+          @click="refill"
+          class="bg-green-700 focus:outline-none hover:bg-green-900 text-white font-medium py-2 px-4 rounded"
+        >註冊</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import Login from "@/api/Login.js";
+import router from "@/router";
+import { onMounted } from "vue";
 export default {
   name: "register",
+  setup() {
+    const loginModule = Login();
+    onMounted(() => {
+      loginModule.clearToken();
+    });
+
+    const registerFunc = async () => {
+      const registerResult = await loginModule.register();
+      if (registerResult === true) {
+        router.push("/signin");
+      }
+    };
+
+    return { ...loginModule, registerFunc };
+  },
 };
 </script>
 
 <style scoped lang="postcss">
+.register {
+  min-height: 100vh;
+  padding-top: 20vh;
+}
+.registercontent {
+  min-height: 30vh;
+  width: 20vw;
+}
 </style>
