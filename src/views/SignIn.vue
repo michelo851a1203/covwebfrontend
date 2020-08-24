@@ -62,8 +62,17 @@ export default {
   min-height: 100vh;
   padding-top: 20vh;
 }
+
+
 .signcontent {
   min-height: 30vh;
-  width: 20vw;
+  width: 30%;
 }
+@media only screen and (min-width: 1400px) {
+  .signcontent {
+    width: 20%;
+  }
+}
+
+
 </style>

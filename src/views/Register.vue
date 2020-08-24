@@ -3,7 +3,7 @@
     <div
       class="registercontent flex items-center flex-col py-12 shadow-2xl rounded mx-auto bg-white"
     >
-      <div class="self-start ml-10 mb-4">
+      <div class="registertitle self-start mb-4">
         <label>檢驗中心註冊</label>
       </div>
       <div class="mb-4">
@@ -81,8 +81,16 @@ export default {
   min-height: 100vh;
   padding-top: 20vh;
 }
+.registertitle {
+  margin-left: 10%;
+}
 .registercontent {
   min-height: 30vh;
-  width: 20vw;
+  width: 30%;
+}
+@media only screen and (min-width: 1400px) {
+  .registercontent {
+    width: 20%;
+  }
 }
 </style>
