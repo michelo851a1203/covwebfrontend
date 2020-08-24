@@ -1,26 +1,54 @@
 <template>
-  <div class="reportContent flex items-center flex-col py-12 shadow-2xl rounded mx-auto bg-white">
-    <div class="self-start ml-10 mb-4">
-      <label>填寫紀錄</label>
-    </div>
-    <div class="mb-4">
-      <input
-        class="border-b-2 border-gray-400 px-4 pt-1 focus:outline-none"
-        placeholder="ID..."
-        type="text"
-      />
-    </div>
-    <genqrcode v-if="false"></genqrcode>
-    <div class="w-4/5 mb-2 flex justify-around">
+  <div class="reportContent py-12 shadow-2xl rounded mx-auto bg-white">
+    <section class="flex items-center justify-around">
+      <div class="py-2">
+        <table class="text-sm">
+          <tr>
+            <th class="px-3 py-1">Sample</th>
+            <td class="text-blue-400 px-3 py-1">AAAAAA</td>
+          </tr>
+          <tr>
+            <th class="px-3 py-1">Sample</th>
+            <td class="text-blue-400 px-3 py-1">AAAAAA</td>
+          </tr>
+          <tr>
+            <th class="px-3 py-1">Sample</th>
+            <td class="text-blue-400 px-3 py-1">AAAAAA</td>
+          </tr>
+          <tr>
+            <th class="px-3 py-1">Sample</th>
+            <td class="text-blue-400 px-3 py-1">AAAAAA</td>
+          </tr>
+          <tr>
+            <th class="px-3 py-1">Sample</th>
+            <td class="text-blue-400 px-3 py-1">AAAAAA</td>
+          </tr>
+          <tr>
+            <th class="px-3 py-1">Sample</th>
+            <td class="text-blue-400 px-3 py-1">AAAAAA</td>
+          </tr>
+          <tr>
+            <th class="px-3 py-1">Sample</th>
+            <td class="text-blue-400 px-3 py-1">AAAAAA</td>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <genqrcode v-if="true" qrStr="www.google.com" width="200" height="200"></genqrcode>
+      </div>
+    </section>
+    <section class="mt-10 text-center">
+      <label for>VC test report will be sent to</label>
+      <label class="text-blue-400">alice.smith@gmail.com</label>
+    </section>
+    <section class="mt-10 w-full mb-2 flex justify-around">
       <button
-        @click="registerFunc"
-        class="bg-gray-700 focus:outline-none hover:bg-gray-900 text-white font-medium py-2 px-4 rounded"
+        class="w-1/3 bg-gray-700 focus:outline-none hover:bg-gray-900 text-white font-medium py-2 px-4 rounded"
       >重填</button>
       <button
-        @click="refill"
-        class="bg-green-700 focus:outline-none hover:bg-green-900 text-white font-medium py-2 px-4 rounded"
+        class="w-1/3 bg-green-700 focus:outline-none hover:bg-green-900 text-white font-medium py-2 px-4 rounded"
       >送出</button>
-    </div>
+    </section>
   </div>
 </template>
 
@@ -38,11 +66,11 @@ export default {
 <style scoped lang="postcss">
 .reportContent {
   min-height: 30vh;
-  width: 30%;
+  width: 50%;
 }
 @media only screen and (min-width: 1400px) {
   .reportContent {
-    width: 20%;
+    width: 40%;
   }
 }
 </style>

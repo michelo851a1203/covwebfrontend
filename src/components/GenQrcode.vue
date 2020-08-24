@@ -18,7 +18,7 @@ export default {
     const canvas = ref(null);
     onMounted(() => {
       QRCode.toCanvas(
-        canvas,
+        canvas.value,
         props.qrStr,
         {
           margin: 0,
@@ -38,7 +38,7 @@ export default {
         if (!val || val === "") {
           return;
         }
-        QRCode.toCanvas(canvas, props.qrStr, (error) => {
+        QRCode.toCanvas(canvas.value, props.qrStr, (error) => {
           if (error) {
             console.error(error);
           }
