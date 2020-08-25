@@ -65,6 +65,41 @@ export default function Login() {
         return true
     }
 
+    // TODO 使用者詳細資訊
+    const getUserDetail = () => {
+        const response = await LoginModules.getUserDetail()
+        if (response.success !== true) {
+            console.error("register error");
+            return response.data
+        }
+        return response.data
+        // User 物件:
+        // {
+        //     _id: "5595fa55d59f10495a701e86",
+        //     displayName: "jos-test",
+        //     username: "jos-test",
+        //     email: "jos-test@gmail.com",
+        //     role: 2,
+        //     credential: (憑證物件),
+        //     wallet: "CmHhl3nuLcwGD60VZ7EeFu6Rtkv9EBBLG",
+        //     updatedAt: 1435892309216,
+        //     createdAt: 1435892309215,
+        // }
+        // Wallet_Credential 物件:
+        // {
+        //     _id: '5595fa55d59f10495a701e86',
+        //     credentialId: 'ed934ece-02b0-420b-b3a5-4e755bbc6659',
+        //     state: 'Offered',
+        //     definitionId: 'DLH2SEc2YcLLPo5fXSiozm:3:CL:131677:default',
+        //     schemaId: 'DLH2SEc2YcLLPo5fXSiozm:2:yrt2g2df2:1.0',
+        //     values: {
+        //         key: 'key value'
+        //     },
+        //     createdAt: 1598274886545,
+        //     updatedAt: 1598274886545,
+        // }
+    }
+
     const clearToken = () => {
         const cluster = localStorage.getItem("covWebItem")
         const token = localStorage.getItem(cluster)
@@ -92,5 +127,5 @@ export default function Login() {
         registerList.registerDisplayName = ""
     }
 
-    return { rootUser, userData, ...toRefs(loginList), ...toRefs(registerList), login, clearToken, refill, register }
+    return { rootUser, userData, ...toRefs(loginList), ...toRefs(registerList), login, register, getUserDetail, clearToken, refill }
 }
