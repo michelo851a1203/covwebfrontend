@@ -66,7 +66,7 @@ export default function Login() {
     }
 
     // TODO 使用者詳細資訊
-    const getUserDetail = () => {
+    const getUserDetail = async () => {
         const response = await LoginModules.getUserDetail()
         if (response.success !== true) {
             console.error("register error");
