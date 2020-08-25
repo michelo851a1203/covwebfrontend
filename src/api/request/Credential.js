@@ -42,7 +42,7 @@ export default {
                     Authorization: token
                 }
             })
-            const { data:response } = await instance.post(url, {
+            const { data: response } = await instance.post(url, {
                 email,
                 definitionId,
                 data
@@ -75,5 +75,28 @@ export default {
             console.error(`error : ${error}`);
         }
     },
+    sendMail: async (credentialId) => {
+        const cluster = localStorage.getItem("covWebItem")
+        const token = localStorage.getItem(cluster)
+        if (!cluster || !token || cluster === "" || token === "") {
+            console.error("no Authorization");
+            return
+        }
 
+        try {
+            const url = "/api/v1/wallet/email"
+            const instance = axios.create({
+                baseURL: config.baseURL,
+                headers: {
+                    Authorization: token
+                }
+            })
+            const { data } = await instance.post(url, {
+                credentialId
+            })
+            return data
+        } catch (error) {
+            console.error(`error : ${error}`);
+        }
+    }
 }
