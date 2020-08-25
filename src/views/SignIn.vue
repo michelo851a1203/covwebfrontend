@@ -33,7 +33,6 @@
 
 <script>
 import Login from "@/api/Login.js";
-import Credential from "@/api/Credential.js";
 import router from "@/router";
 import { onMounted } from "vue";
 export default {
@@ -51,26 +50,9 @@ export default {
         console.error("not get this token");
         return;
       }
-      // get credential data.
-      // if role is 2
-
-      switch (loginModule.userData.role) {
-        case 1:
-          // user
-          break;
-        case 2:
-          // verify person
-          break;
-        case 3:
-          // check center
-          await Credential.getCredDefinition();
-          break;
-        case -1:
-          console.error("login in success but not get role");
-          return;
-          break;
-        default:
-          break;
+      if (loginModule.userData.role === -1) {
+        console.error("login in success but not get role");
+        return;
       }
 
       router.push("/");

@@ -29,6 +29,26 @@ export default function Login() {
         updatedAt: -1
     })
 
+    const regainLoginUser = () => {
+        const cluster = localStorage.getItem("covWebItem");
+        const token = localStorage.getItem(cluster);
+        const userStr = localStorage.getItem("covWebItemUser");
+        if (!cluster || !token || !userStr || cluster === "" || token === "" || userStr === "") {
+            return false
+        }
+        const user = config.tryParseJSON(userStr)
+        if (!user) {
+            return false
+        }
+        userData.role = user.role
+        userData.username = user.username
+        userData._id = user._id
+        userData.displayName = user.displayName
+        userData.createdAt = user.createdAt
+        userData.updatedAt = user.updatedAt
+        return true
+    }
+
     const login = async () => {
         const response = await LoginModules.login(loginList.user, loginList.password)
         if (response.success !== true) {
@@ -53,6 +73,7 @@ export default function Login() {
         userData.displayName = mainUserData.displayName
         userData.createdAt = mainUserData.createdAt
         userData.updatedAt = mainUserData.updatedAt
+        localStorage.setItem("covWebItemUser", JSON.stringify(mainUserData))
     }
 
     const register = async () => {
@@ -103,11 +124,15 @@ export default function Login() {
     const clearToken = () => {
         const cluster = localStorage.getItem("covWebItem")
         const token = localStorage.getItem(cluster)
+        const mainUserDataStr = localStorage.getItem("covWebItemUser")
         if (token) {
             localStorage.removeItem(cluster)
         }
         if (cluster) {
             localStorage.removeItem("covWebItem")
+        }
+        if (mainUserDataStr) {
+            localStorage.removeItem("covWebItemUser")
         }
         rootUser.username = ""
         rootUser.accessToken = ""
@@ -127,5 +152,5 @@ export default function Login() {
         registerList.registerDisplayName = ""
     }
 
-    return { rootUser, userData, ...toRefs(loginList), ...toRefs(registerList), login, register, getUserDetail, clearToken, refill }
+    return { rootUser, userData, ...toRefs(loginList), ...toRefs(registerList), login, regainLoginUser, register, getUserDetail, clearToken, refill }
 }

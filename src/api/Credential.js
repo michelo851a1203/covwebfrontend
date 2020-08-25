@@ -27,7 +27,8 @@ export default function Credential() {
         credDefinition.definitionId = defData.definitionId
         credDefinition.schemaId = defData.schemaId
         credDefinition.supportsRevocation = defData.supportsRevocation
-        credDefinition.attributes = defData.attributes
+        credDefinition.attributes.value = defData.attributes
+        console.log("hello");
     }
 
     const refillRecord = () => {
@@ -37,7 +38,7 @@ export default function Credential() {
     }
 
     const sendIssue = async () => {
-        if (sendToUserEmails.value === "") {
+        if (sendToUserEmail.value === "") {
             console.error("sendToUserEmails is empty");
             return
         }
@@ -56,7 +57,7 @@ export default function Credential() {
             }
         })
 
-        const response = await CredentialModule.sendCredential(sendToUserEmails.value, credDefinition.definitionId, issueData.value)
+        const response = await CredentialModule.sendCredential(sendToUserEmail.value, credDefinition.definitionId, issueData.value)
         if (response.success !== true) {
             console.error("getCredentialDetail error");
             return

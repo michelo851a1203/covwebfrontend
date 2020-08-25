@@ -37,18 +37,24 @@
 </template>
 
 <script>
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import Credential from "@/api/Credential.js";
 import config from "@/api/request/config.js";
 export default {
   name: "homeIndex",
   setup() {
-    const { issueData, attributes, sendToUserEmail, sendIssue } = Credential();
+    const {
+      issueData,
+      attributes,
+      sendToUserEmail,
+      sendIssue,
+      refillRecord,
+    } = Credential();
     const attrData = computed(() => {
-      if (attributes.length === 0) {
+      if (attributes.value.length === 0) {
         return [];
       }
-      const oData = attributes.map((item) => {
+      const oData = attributes.value.map((item) => {
         return {
           id: config.uuid(),
           title: item,
@@ -56,7 +62,7 @@ export default {
       });
       return oData;
     });
-    return { issueData, attrData, sendToUserEmail, refillRecord, sendIssue };
+    return { issueData, attrData, sendToUserEmail, sendIssue, refillRecord };
   },
 };
 </script>
