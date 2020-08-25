@@ -42,12 +42,12 @@ export default {
                     Authorization: token
                 }
             })
-            const { data } = await instance.post(url, {
+            const { data:response } = await instance.post(url, {
                 email,
                 definitionId,
                 data
             })
-            return data
+            return response
         } catch (error) {
             console.error(`error : ${error}`);
         }

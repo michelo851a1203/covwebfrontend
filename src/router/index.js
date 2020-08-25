@@ -51,7 +51,7 @@ router.beforeEach((to, from, next) => {
   }
 
   const cluster = localStorage.getItem("covWebItem")
-  const token = localStorage.setItem(cluster)
+  const token = localStorage.getItem(cluster)
   if (cluster && cluster !== "" && token && token !== "") {
     next()
     return

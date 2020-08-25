@@ -40,11 +40,11 @@
       </div>
       <div class="w-4/5 mb-2 flex justify-around">
         <button
-          @click="registerFunc"
+          @click="refill"
           class="bg-gray-700 focus:outline-none hover:bg-gray-900 text-white font-medium py-2 px-4 rounded"
         >重填</button>
         <button
-          @click="refill"
+          @click="registerFunc"
           class="bg-green-700 focus:outline-none hover:bg-green-900 text-white font-medium py-2 px-4 rounded"
         >註冊</button>
       </div>
