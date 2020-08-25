@@ -3,24 +3,19 @@
     <section class="flex items-center justify-around">
       <div class="py-2">
         <table class="text-sm">
-          <tr v-for="item in Object.keys(reportData.credential.values)" :key="item">
+          <tr v-for="item in Object.keys(report.credential.values)" :key="item">
             <th class="px-3 py-1">{{ item }}</th>
-            <td class="text-blue-400 px-3 py-1">{{ reportData[item] }}</td>
+            <td class="text-blue-400 px-3 py-1">{{ report.credential.values[item] }}</td>
           </tr>
         </table>
       </div>
       <div>
-        <genqrcode
-          v-if="reportData._id && reportData._id !== ''"
-          :qrStr="reportData._id"
-          width="200"
-          height="200"
-        ></genqrcode>
+        <genqrcode v-if="report._id !== ''" :qrStr="report._id" width="200" height="200"></genqrcode>
       </div>
     </section>
     <section class="mt-10 text-center">
       <label for>VC test report will be sent to</label>
-      <label class="text-blue-400">alice.smith@gmail.com</label>
+      <label class="text-blue-400">{{ report.displayName }}</label>
     </section>
     <section class="mt-10 w-full mb-2 flex justify-around">
       <button

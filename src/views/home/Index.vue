@@ -70,7 +70,7 @@ export default {
     }
 
     const sendIssueFunc = async () => {
-      const oResult = await credentialModule.sendIssue;
+      const oResult = await credentialModule.sendIssue();
       if (!oResult) {
         return;
       }

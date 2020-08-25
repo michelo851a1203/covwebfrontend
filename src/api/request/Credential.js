@@ -47,9 +47,6 @@ export default {
                 definitionId,
                 data
             })
-            console.group(`%c response`,'color:yellow');
-            console.log(response);
-            console.groupEnd();
             return response
         } catch (error) {
             console.error(`error : ${error}`);

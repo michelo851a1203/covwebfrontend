@@ -1,7 +1,7 @@
 import { ref, computed } from "vue"
 import config from "./request/config.js"
 import CredentialModule from "./request/Credential.js"
-import reportData from "./global/report.js"
+import report from "./global/report.js"
 import credentialData from "./global/credentialData.js"
 
 export default function Credential() {
@@ -59,7 +59,7 @@ export default function Credential() {
             console.error("issueData is empty");
             return false
         }
-        if (!config.validateEmail(sendToUserEmail)) {
+        if (!config.validateEmail(sendToUserEmail.value)) {
             console.error("sendEmail is error");
             return false
         }
@@ -81,18 +81,22 @@ export default function Credential() {
         }
         const responseData = response.data
 
-        reportData.displayName = responseData.displayName
-        reportData.role = responseData.role
-        reportData.updatedAt = responseData.updatedAt
-        reportData.username = responseData.username
-        reportData.wallet = responseData.wallet
-        reportData._id = responseData._id
-        reportData.credential = responseData.credential
+        console.group(`%c responseData`, 'color:yellow');
+        console.log(responseData);
+        console.groupEnd();
+
+        report.displayName = responseData.displayName
+        report.role = responseData.role
+        report.updatedAt = responseData.updatedAt
+        report.username = responseData.username
+        report.wallet = responseData.wallet
+        report._id = responseData._id
+        report.credential = responseData.credential
         return true
     }
 
     const sendMailApi = () => {
         console.log("OK wait for send Mail");
     }
-    return { reportData, credentialData, attr, issueData, sendToUserEmail, lock, getCredDefinition, sendIssue, refillRecord, sendMailApi }
+    return { report, credentialData, attr, issueData, sendToUserEmail, lock, getCredDefinition, sendIssue, refillRecord, sendMailApi }
 }
