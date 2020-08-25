@@ -3,7 +3,7 @@
     <div class="self-start ml-10 mb-4">
       <label>填寫紀錄</label>
     </div>
-    <div v-for="item in credDefinition.attr" :key="item.id" class="mb-4">
+    <div v-for="item in attr" :key="item.id" class="mb-4">
       <input
         v-model.lazy.trim="issueData[item.title]"
         class="border-b-2 border-gray-400 px-4 pt-1 focus:outline-none"
