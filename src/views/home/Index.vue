@@ -3,7 +3,7 @@
     <div class="self-start ml-10 mb-4">
       <label>填寫紀錄</label>
     </div>
-    <div v-for="item in attrData" :key="item.id" class="mb-4">
+    <div v-for="item in credDefinition.attr" :key="item.id" class="mb-4">
       <input
         v-model.lazy.trim="issueData[item.title]"
         class="border-b-2 border-gray-400 px-4 pt-1 focus:outline-none"
@@ -37,32 +37,38 @@
 </template>
 
 <script>
-import { computed } from "vue";
+import Login from "@/api/Login.js";
 import Credential from "@/api/Credential.js";
-import config from "@/api/request/config.js";
+import router from "@/router";
 export default {
   name: "homeIndex",
   setup() {
-    const {
-      issueData,
-      attributes,
-      sendToUserEmail,
-      sendIssue,
-      refillRecord,
-    } = Credential();
-    const attrData = computed(() => {
-      if (attributes.value.length === 0) {
-        return [];
-      }
-      const oData = attributes.value.map((item) => {
-        return {
-          id: config.uuid(),
-          title: item,
-        };
+    const loginModule = Login();
+    if (!loginModule.regainLoginUser()) {
+      router.push({
+        name: "signIn",
       });
-      return oData;
-    });
-    return { issueData, attrData, sendToUserEmail, sendIssue, refillRecord };
+    }
+    const credentialModule = Credential();
+    if (loginModule.userData.role === -1) {
+      console.error("login in success but not get role");
+      return;
+    }
+    switch (loginModule.userData.role) {
+      case 1:
+        // user
+        break;
+      case 2:
+        // verify person
+        break;
+      case 3:
+        // check center
+        credentialModule.getCredDefinition();
+        break;
+      default:
+        break;
+    }
+    return { ...credentialModule };
   },
 };
 </script>

@@ -1,5 +1,5 @@
-import { ref, reactive, toRefs } from "vue"
-// import config from "./request/config.js"
+import { ref, reactive,computed, } from "vue"
+import config from "./request/config.js"
 import CredentialModule from "./request/Credential.js"
 
 export default function Credential() {
@@ -10,10 +10,22 @@ export default function Credential() {
         schemaId: "",
         supportsRevocation: false,
         attributes: [],
+        attr: computed(() => {
+            if (credDefinition.attributes.length === 0) {
+                return [];
+            }
+            const oData = credDefinition.attributes.map((item) => {
+                return {
+                    id: config.uuid(),
+                    title: item,
+                };
+            });
+            return oData;
+        })
     })
+
     const issueData = ref({})
     const sendToUserEmail = ref("")
-
     const getCredDefinition = async () => {
         const response = await CredentialModule.getCredentialDetail()
         if (response.success !== true) {
@@ -27,8 +39,7 @@ export default function Credential() {
         credDefinition.definitionId = defData.definitionId
         credDefinition.schemaId = defData.schemaId
         credDefinition.supportsRevocation = defData.supportsRevocation
-        credDefinition.attributes.value = defData.attributes
-        console.log("hello");
+        credDefinition.attributes = defData.attributes
     }
 
     const refillRecord = () => {
@@ -64,7 +75,6 @@ export default function Credential() {
         }
         response.data
     }
-
-    return { ...toRefs(credDefinition), issueData, sendToUserEmail, getCredDefinition, sendIssue, refillRecord }
+    return { credDefinition, issueData, sendToUserEmail, getCredDefinition, sendIssue, refillRecord }
 
 }
