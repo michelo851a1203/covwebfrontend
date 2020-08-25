@@ -20,8 +20,8 @@
       />
     </div>
     <div class="mb-4 flex items-center self-start ml-10">
-      <input id="confirm" type="checkbox" />
-      <label class="text-xs ml-2" for="confirm">確認以上資料皆無誤</label>
+      <input v-model="lock" id="confirm" type="checkbox" />
+      <label class="cursor-pointer text-xs ml-2" for="confirm">確認以上資料皆無誤</label>
     </div>
     <div class="w-4/5 mb-2 flex justify-around">
       <button
@@ -29,7 +29,7 @@
         class="bg-gray-700 focus:outline-none hover:bg-gray-900 text-white font-medium py-2 px-4 rounded"
       >重填</button>
       <button
-        @click="sendIssue"
+        @click="sendIssueFunc"
         class="bg-green-700 focus:outline-none hover:bg-green-900 text-white font-medium py-2 px-4 rounded"
       >送出</button>
     </div>
@@ -68,7 +68,15 @@ export default {
       default:
         break;
     }
-    return { ...credentialModule };
+
+    const sendIssueFunc = async () => {
+      const oResult = await credentialModule.sendIssue;
+      if (!oResult) {
+        return;
+      }
+      router.push("/report");
+    };
+    return { ...credentialModule, sendIssueFunc };
   },
 };
 </script>
