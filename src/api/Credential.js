@@ -81,9 +81,6 @@ export default function Credential() {
         }
         const responseData = response.data
 
-        console.group(`%c responseData`, 'color:yellow');
-        console.log(responseData);
-        console.groupEnd();
 
         report.displayName = responseData.displayName
         report.role = responseData.role

@@ -1,6 +1,8 @@
 import { reactive, toRefs } from "vue"
 import config from "./request/config.js"
 import LoginModules from "./request/Login.js"
+import report from "./global/report.js"
+import credentialData from "./global/credentialData.js"
 
 export default function Login() {
     const loginList = reactive({
@@ -143,6 +145,29 @@ export default function Login() {
         rootUser.displayName = ""
         rootUser.createdAt = -1
         rootUser.updatedAt = -1
+        // clear Credential
+        report.displayName = ""
+        report.role = -1
+        report.updatedAt = -1
+        report.username = ""
+        report.wallet = ""
+        report._id = ""
+        report.credential = {
+            createdAt: -1,
+            credentialId: "",
+            definitionId: "",
+            schemaId: "",
+            state: "",
+            updatedAt: "",
+            values: {}
+        }
+        // clear credentialData
+        credentialData.name = ""
+        credentialData.version = ""
+        credentialData.definitionId = ""
+        credentialData.schemaId = ""
+        credentialData.supportsRevocation = false
+        credentialData.attributes = []
     }
 
     const refill = () => {

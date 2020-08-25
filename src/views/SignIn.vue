@@ -54,8 +54,18 @@ export default {
         console.error("login in success but not get role");
         return;
       }
-
-      router.push("/");
+      switch (loginModule.userData.role) {
+        case 1:
+          router.push("/report");
+          break;
+        case 2:
+          break;
+        case 3:
+          router.push("/");
+          break;
+        default:
+          break;
+      }
     };
     return { ...loginModule, loginFunc };
   },
