@@ -23,6 +23,7 @@ export default {
             return data
         } catch (error) {
             console.error(`error : ${error}`);
+            return { success: false }
         }
     },
     // TODO:檢驗中心使用：建立 憑證 與 Wallet 後進行連線並取得憑證發送至檢測者信箱
@@ -50,6 +51,7 @@ export default {
             return response
         } catch (error) {
             console.error(`error : ${error}`);
+            return { success: false }
         }
     },
     // TODO:使者使用： 取得憑證詳細資訊
@@ -73,6 +75,7 @@ export default {
             return data
         } catch (error) {
             console.error(`error : ${error}`);
+            return { success: false }
         }
     },
     sendMail: async (credentialId) => {
@@ -84,7 +87,7 @@ export default {
         }
 
         try {
-            const url = "/api/v1/wallet/email"
+            const url = "/api/v1/email"
             const instance = axios.create({
                 baseURL: config.baseURL,
                 headers: {
@@ -94,9 +97,13 @@ export default {
             const { data } = await instance.post(url, {
                 credentialId
             })
+            console.group(`%c sendMail`, 'color:yellow');
+            console.log(data);
+            console.groupEnd();
             return data
         } catch (error) {
             console.error(`error : ${error}`);
+            return { success: false }
         }
     }
 }

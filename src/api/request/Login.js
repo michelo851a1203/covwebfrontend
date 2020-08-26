@@ -12,9 +12,13 @@ export default {
                 username,
                 password
             })
+            console.group(`%c login`, 'color:yellow');
+            console.log(data);
+            console.groupEnd();
             return data
         } catch (error) {
             console.error(`error : ${error}`);
+            return { success: false }
         }
     },
     register: async (username, password, email, displayName) => {
@@ -32,6 +36,7 @@ export default {
             return data
         } catch (error) {
             console.error(`error : ${error}`);
+            return { success: false }
         }
     },
     // TODO :使用者詳細資訊
@@ -55,6 +60,7 @@ export default {
             return data
         } catch (error) {
             console.error(`error : ${error}`);
+            return { success: false }
         }
     },
 

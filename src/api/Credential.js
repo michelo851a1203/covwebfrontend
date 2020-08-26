@@ -75,7 +75,7 @@ export default function Credential() {
         })
 
         const response = await CredentialModule.sendCredential(sendToUserEmail.value, credentialData.definitionId, issueData.value)
-        if (response.success !== true) {
+        if (!response || !response.success) {
             console.error("getCredentialDetail error");
             return false
         }
@@ -95,7 +95,7 @@ export default function Credential() {
     const sendMailApi = async () => {
         console.log("OK wait for send Mail");
         const response = await CredentialModule.sendMail(report.credential.credentialId)
-        if (response.success !== true) {
+        if (!response || !response.success) {sendMailApi
             console.error("sendMail error");
             return false
         }

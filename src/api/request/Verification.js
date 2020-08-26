@@ -23,6 +23,7 @@ export default {
             return data
         } catch (error) {
             console.error(`error : ${error}`);
+            return { success: false }
         }
     },
     // TODO 驗證者使用： 掃描 Qrcode 取得憑證 id， 進行驗證並返回驗證資訊
@@ -48,6 +49,7 @@ export default {
             return data
         } catch (error) {
             console.error(`error : ${error}`);
+            return { success: false }
         }
     },
 
