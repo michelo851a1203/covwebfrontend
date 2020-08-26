@@ -1,5 +1,11 @@
 <template>
   <div class="signin bg-green-600">
+    <component
+      v-if="currentStatus.title !== '' && currentStatus.status !== ''"
+      @close="closeAlert"
+      :currentstatus="currentStatus"
+      :is="alertComponent"
+    ></component>
     <div class="signcontent flex items-center flex-col py-12 shadow-2xl rounded mx-auto bg-white">
       <div class="mb-4">
         <input
@@ -34,24 +40,61 @@
 <script>
 import Login from "@/api/Login.js";
 import router from "@/router";
-import { onMounted } from "vue";
+import alert from "@/components/Alert.vue";
+import alertmobile from "@/components/Alertmobile.vue";
+import config from "@/api/request/config.js";
+import { onMounted, ref } from "vue";
 export default {
   name: "Signin",
+  components: {
+    alert,
+    alertmobile,
+  },
   setup() {
+    const alertComponent = ref("alert");
+    if (config.mobileCheck()) {
+      alertComponent.value = "alertmobile";
+    }
+
     const loginModule = Login();
     onMounted(() => {
       loginModule.clearToken();
     });
     const loginFunc = async () => {
-      await loginModule.login();
+      if (loginModule.user === "") {
+        loginModule.normalAlert({
+          title: "請輸入帳號",
+          status: "fail",
+        });
+        return;
+      }
+      if (loginModule.password === "") {
+        loginModule.normalAlert({
+          title: "請輸入密碼",
+          status: "fail",
+        });
+        return;
+      }
+      const oResult = await loginModule.login();
+      if (!oResult) {
+        return;
+      }
       const cluster = localStorage.getItem("covWebItem");
       const token = localStorage.getItem(cluster);
       if (!token || token === "" || loginModule.storageToken === "") {
         console.error("not get this token");
+        loginModule.normalAlert({
+          title: "登入失敗尚未取得token",
+          status: "fail",
+        });
         return;
       }
       if (loginModule.userData.role === -1) {
         console.error("login in success but not get role");
+        loginModule.normalAlert({
+          title: "登入成功但尚未取得角色",
+          status: "fail",
+        });
         return;
       }
       switch (loginModule.userData.role) {
@@ -68,7 +111,11 @@ export default {
           break;
       }
     };
-    return { ...loginModule, loginFunc };
+    return {
+      ...loginModule,
+      loginFunc,
+      alertComponent,
+    };
   },
 };
 </script>

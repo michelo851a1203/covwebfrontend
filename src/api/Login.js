@@ -1,10 +1,15 @@
-import { reactive, toRefs } from "vue"
+import { ref, reactive, toRefs } from "vue"
 import config from "./request/config.js"
 import LoginModules from "./request/Login.js"
 import report from "./global/report.js"
 import credentialData from "./global/credentialData.js"
 
 export default function Login() {
+
+    const currentStatus = ref({
+        title: "",
+        status: "",
+    });
     const loginList = reactive({
         user: "",
         password: "",
@@ -52,10 +57,14 @@ export default function Login() {
     }
 
     const login = async () => {
+        currentStatus.value.title = "登入中"
+        currentStatus.value.status = "loading"
         const response = await LoginModules.login(loginList.user, loginList.password)
         if (!response || !response.success) {
             console.error("login error");
-            return
+            currentStatus.value.title = "登入失敗"
+            currentStatus.value.status = "fail"
+            return false
         }
         const mainData = response.data
         const token = mainData.accessToken
@@ -76,6 +85,7 @@ export default function Login() {
         userData.createdAt = mainUserData.createdAt
         userData.updatedAt = mainUserData.updatedAt
         localStorage.setItem("covWebItemUser", JSON.stringify(mainUserData))
+        return true
     }
 
     const register = async () => {
@@ -96,31 +106,6 @@ export default function Login() {
             return response.data
         }
         return response.data
-        // User 物件:
-        // {
-        //     _id: "5595fa55d59f10495a701e86",
-        //     displayName: "jos-test",
-        //     username: "jos-test",
-        //     email: "jos-test@gmail.com",
-        //     role: 2,
-        //     credential: (憑證物件),
-        //     wallet: "CmHhl3nuLcwGD60VZ7EeFu6Rtkv9EBBLG",
-        //     updatedAt: 1435892309216,
-        //     createdAt: 1435892309215,
-        // }
-        // Wallet_Credential 物件:
-        // {
-        //     _id: '5595fa55d59f10495a701e86',
-        //     credentialId: 'ed934ece-02b0-420b-b3a5-4e755bbc6659',
-        //     state: 'Offered',
-        //     definitionId: 'DLH2SEc2YcLLPo5fXSiozm:3:CL:131677:default',
-        //     schemaId: 'DLH2SEc2YcLLPo5fXSiozm:2:yrt2g2df2:1.0',
-        //     values: {
-        //         key: 'key value'
-        //     },
-        //     createdAt: 1598274886545,
-        //     updatedAt: 1598274886545,
-        // }
     }
 
     const clearToken = () => {
@@ -177,5 +162,19 @@ export default function Login() {
         registerList.registerDisplayName = ""
     }
 
-    return { rootUser, userData, ...toRefs(loginList), ...toRefs(registerList), login, regainLoginUser, register, getUserDetail, clearToken, refill }
+    const closeAlert = () => {
+        currentStatus.value.title = ""
+        currentStatus.value.status = ""
+    }
+
+    const normalAlert = ({ title, status }) => {
+        currentStatus.value.title = title
+        currentStatus.value.status = status
+        setTimeout(() => {
+            currentStatus.value.title = ""
+            currentStatus.value.status = ""
+        }, 1500);
+    }
+
+    return { currentStatus, rootUser, userData, ...toRefs(loginList), ...toRefs(registerList), login, regainLoginUser, register, getUserDetail, clearToken, refill, closeAlert, normalAlert }
 }
