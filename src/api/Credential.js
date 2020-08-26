@@ -105,16 +105,10 @@ export default function Credential() {
             console.error("getUserDetail error");
             return false
         }
-
         const detailData = response.data
-        // report.displayName = responseData.displayName
-        // report.role = responseData.role
         report.updatedAt = detailData.updatedAt
-        // report.username = responseData.username
-        // report.wallet = responseData.wallet
         report._id = detailData._id
-        report.credential = detailData.values
-
+        report.credential.values = detailData.values
     }
     return { report, credentialData, attr, issueData, sendToUserEmail, lock, getCredDefinition, sendIssue, refillRecord, sendMailApi, getUserDetail }
 }

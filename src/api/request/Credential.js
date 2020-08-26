@@ -98,9 +98,6 @@ export default {
             const { data } = await instance.post(url, {
                 credentialId: _id
             })
-            console.group(`%c sendMail`, 'color:yellow');
-            console.log(data);
-            console.groupEnd();
             return data
         } catch (error) {
             console.error(`error : ${error}`);
