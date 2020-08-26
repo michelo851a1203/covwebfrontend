@@ -81,7 +81,6 @@ export default function Credential() {
         }
         const responseData = response.data
 
-
         report.displayName = responseData.displayName
         report.role = responseData.role
         report.updatedAt = responseData.updatedAt
@@ -95,10 +94,28 @@ export default function Credential() {
     const sendMailApi = async () => {
         console.log("OK wait for send Mail");
         const response = await CredentialModule.sendMail(report.credential.credentialId)
-        if (!response || !response.success) {sendMailApi
+        if (!response || !response.success) {
             console.error("sendMail error");
             return false
         }
     }
-    return { report, credentialData, attr, issueData, sendToUserEmail, lock, getCredDefinition, sendIssue, refillRecord, sendMailApi }
+
+    const getUserDetail = async () => {
+        const response = await CredentialModule.getUserCredential()
+        if (!response || !response.success) {
+            console.error("getUserDetail error");
+            return false
+        }
+
+        const detailData = response.data
+        // report.displayName = responseData.displayName
+        // report.role = responseData.role
+        report.updatedAt = detailData.updatedAt
+        // report.username = responseData.username
+        // report.wallet = responseData.wallet
+        report._id = detailData._id
+        report.credential = detailData.values
+
+    }
+    return { report, credentialData, attr, issueData, sendToUserEmail, lock, getCredDefinition, sendIssue, refillRecord, sendMailApi, getUserDetail }
 }

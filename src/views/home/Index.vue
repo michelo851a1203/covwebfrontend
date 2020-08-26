@@ -44,12 +44,12 @@ export default {
   name: "homeIndex",
   setup() {
     const loginModule = Login();
+    const credentialModule = Credential();
     if (!loginModule.regainLoginUser()) {
       router.push({
         name: "signIn",
       });
     }
-    const credentialModule = Credential();
     if (loginModule.userData.role === -1) {
       console.error("login in success but not get role");
       return;

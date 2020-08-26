@@ -13,11 +13,11 @@
         <genqrcode v-if="report._id !== ''" :qrStr="report._id" width="200" height="200"></genqrcode>
       </div>
     </section>
-    <section class="mt-10 text-center">
+    <section v-if="reportRole === 3" class="mt-10 text-center">
       <label for>VC test report will be sent to</label>
       <label class="text-blue-400">{{ report.displayName }}</label>
     </section>
-    <section class="mt-10 w-full mb-2 flex justify-around">
+    <section v-if="reportRole === 3" class="mt-10 w-full mb-2 flex justify-around">
       <button
         @click="backtoRecord"
         class="w-1/3 bg-gray-700 focus:outline-none hover:bg-gray-900 text-white font-medium py-2 px-4 rounded"
@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import { ref } from "vue";
+import Login from "@/api/Login.js";
 import genqrcode from "@/components/GenQrcode.vue";
 import Credential from "@/api/Credential.js";
 import router from "@/router";
@@ -40,11 +42,39 @@ export default {
     genqrcode,
   },
   setup() {
+    const loginModule = Login();
     const credentialModule = Credential();
+    if (!loginModule.regainLoginUser()) {
+      router.push({
+        name: "signIn",
+      });
+    }
+    if (loginModule.userData.role === -1) {
+      console.error("login in success but not get role");
+      return;
+    }
+
+    const reportRole = ref(-1);
+    reportRole.value = loginModule.userData.role;
+    switch (loginModule.userData.role) {
+      case 1:
+        // user
+        credentialModule.getUserDetail();
+        break;
+      case 2:
+        // verify person
+        break;
+      case 3:
+        // check center
+        break;
+      default:
+        break;
+    }
+
     const backtoRecord = () => {
       router.push("/");
     };
-    return { ...credentialModule, backtoRecord };
+    return { ...credentialModule, backtoRecord, reportRole };
   },
 };
 </script>
