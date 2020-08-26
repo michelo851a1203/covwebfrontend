@@ -23,7 +23,7 @@
         class="w-1/3 bg-gray-700 focus:outline-none hover:bg-gray-900 text-white font-medium py-2 px-4 rounded"
       >返回</button>
       <button
-        @click="sendMailApi"
+        @click="sendMailFunc"
         class="w-1/3 bg-green-700 focus:outline-none hover:bg-green-900 text-white font-medium py-2 px-4 rounded"
       >確認</button>
     </section>
@@ -74,7 +74,14 @@ export default {
     const backtoRecord = () => {
       router.push("/");
     };
-    return { ...credentialModule, backtoRecord, reportRole };
+
+    const sendMailFunc = async () => {
+      const { success } = await credentialModule.sendMailApi();
+      if (success) {
+        router.push("/");
+      }
+    };
+    return { ...credentialModule, backtoRecord, reportRole, sendMailFunc };
   },
 };
 </script>

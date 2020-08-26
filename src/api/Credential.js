@@ -95,8 +95,9 @@ export default function Credential() {
         const response = await CredentialModule.sendMail(report.credential._id)
         if (!response || !response.success) {
             console.error("sendMail error");
-            return false
+            return { success: false }
         }
+        return { success: true }
     }
 
     const getUserDetail = async () => {
