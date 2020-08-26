@@ -4,8 +4,8 @@
       <div class="py-2">
         <table class="text-sm">
           <tr v-for="item in Object.keys(report.credential.values)" :key="item">
-            <th class="px-3 py-1">{{ item }}</th>
-            <td class="text-blue-400 px-3 py-1">{{ report.credential.values[item] }}</td>
+            <th class="text-left px-3 py-1">{{ item }}</th>
+            <td class="text-left text-blue-400 px-3 py-1">{{ report.credential.values[item] }}</td>
           </tr>
         </table>
       </div>
