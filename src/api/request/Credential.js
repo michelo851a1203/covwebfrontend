@@ -71,6 +71,9 @@ export default {
                 }
             })
             const { data } = await instance.get(url)
+            console.group(`%c getUserCredential`,'color:yellow');
+            console.log(data);
+            console.groupEnd();
             return data
         } catch (error) {
             console.error(`error : ${error}`);
