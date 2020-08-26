@@ -5,7 +5,6 @@ import report from "./global/report.js"
 import credentialData from "./global/credentialData.js"
 
 export default function Login() {
-
     const currentStatus = ref({
         title: "",
         status: "",
