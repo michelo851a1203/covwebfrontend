@@ -92,8 +92,7 @@ export default function Credential() {
     }
 
     const sendMailApi = async () => {
-        console.log("OK wait for send Mail");
-        const response = await CredentialModule.sendMail(report.credential.credentialId)
+        const response = await CredentialModule.sendMail(report.credential._id)
         if (!response || !response.success) {
             console.error("sendMail error");
             return false

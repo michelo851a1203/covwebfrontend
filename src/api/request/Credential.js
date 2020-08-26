@@ -34,7 +34,6 @@ export default {
             console.error("no Authorization");
             return
         }
-
         try {
             const url = "/api/v1/credential"
             const instance = axios.create({
@@ -78,14 +77,13 @@ export default {
             return { success: false }
         }
     },
-    sendMail: async (credentialId) => {
+    sendMail: async (_id) => {
         const cluster = localStorage.getItem("covWebItem")
         const token = localStorage.getItem(cluster)
         if (!cluster || !token || cluster === "" || token === "") {
             console.error("no Authorization");
             return
         }
-
         try {
             const url = "/api/v1/email"
             const instance = axios.create({
@@ -95,7 +93,7 @@ export default {
                 }
             })
             const { data } = await instance.post(url, {
-                credentialId
+                credentialId: _id
             })
             console.group(`%c sendMail`, 'color:yellow');
             console.log(data);
