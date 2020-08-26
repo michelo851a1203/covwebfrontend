@@ -26,7 +26,7 @@ export default function Credential() {
             return
         }
         const response = await CredentialModule.getCredentialDetail()
-        if (response.success !== true) {
+        if (!response || !response.success) {
             console.error("getCredentialDetail error");
             return
         }

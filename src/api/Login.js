@@ -53,7 +53,7 @@ export default function Login() {
 
     const login = async () => {
         const response = await LoginModules.login(loginList.user, loginList.password)
-        if (response.success !== true) {
+        if (!response || !response.success) {
             console.error("login error");
             return
         }
@@ -80,7 +80,7 @@ export default function Login() {
 
     const register = async () => {
         const response = await LoginModules.register(registerList.user, registerList.password, registerList.registerEmail, registerList.registerDisplayName)
-        if (response.success !== true) {
+        if (!response || !response.success) {
             console.error("register error");
             return false
         }
@@ -91,7 +91,7 @@ export default function Login() {
     // TODO 使用者詳細資訊
     const getUserDetail = async () => {
         const response = await LoginModules.getUserDetail()
-        if (response.success !== true) {
+        if (!response || !response.success) {
             console.error("register error");
             return response.data
         }
