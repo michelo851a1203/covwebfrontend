@@ -23,12 +23,13 @@ export default function Credential() {
     const lock = ref(false)
     const getCredDefinition = async () => {
         if (credentialData.name !== "" && credentialData.attributes.length > 0) {
-            return
+            console.error("no credentialData.attributes or credentialData.name");
+            return false
         }
         const response = await CredentialModule.getCredentialDetail()
         if (!response || !response.success) {
             console.error("getCredentialDetail error");
-            return
+            return false
         }
         const defData = response.data
 
@@ -38,6 +39,7 @@ export default function Credential() {
         credentialData.schemaId = defData.schemaId
         credentialData.supportsRevocation = defData.supportsRevocation
         credentialData.attributes = defData.attributes
+        return true
     }
 
     const refillRecord = () => {
