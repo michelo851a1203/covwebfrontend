@@ -56,7 +56,7 @@ export default {
     }
     switch (loginModule.userData.role) {
       case 1:
-        // user
+        router.push("/report")
         break;
       case 2:
         // verify person
