@@ -1,12 +1,19 @@
 <template>
-  <div class="signin bg-green-600">
+  <div class="signin sm:bg-green-600">
     <component
       v-if="currentStatus.title !== '' && currentStatus.status !== ''"
       @close="closeAlert"
       :currentstatus="currentStatus"
       :is="alertComponent"
     ></component>
-    <div class="signcontent flex items-center flex-col py-12 shadow-2xl rounded mx-auto bg-white">
+    <div
+      class="signcontent flex items-center flex-col py-12 sm:shadow-2xl rounded mx-auto bg-white"
+    >
+      <section class="sm:hidden leading-loose text-lg text-center mb-4">
+        <p>COVID-19</p>
+        <p>Verifiable Credential</p>
+        <p>Wallet</p>
+      </section>
       <div class="mb-4">
         <input
           v-model.lazy.trim="user"
@@ -123,14 +130,23 @@ export default {
 <style scoped lang="postcss">
 .signin {
   min-height: 100vh;
-  padding-top: 20vh;
+  padding-top: 10vh;
 }
 
 .signcontent {
   min-height: 30vh;
-  width: 30%;
+  width: 100%;
 }
-@media only screen and (min-width: 1400px) {
+@media only screen and (min-width: theme(screens.sm)) {
+  .signin {
+    padding-top: 20vh;
+  }
+  .signcontent {
+    width: 30%;
+  }
+}
+
+@media only screen and (min-width: theme(screens.ultra)) {
   .signcontent {
     width: 20%;
   }

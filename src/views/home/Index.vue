@@ -66,7 +66,7 @@ export default {
   min-height: 30vh;
   width: 30%;
 }
-@media only screen and (min-width: 1400px) {
+@media only screen and (min-width: theme(screens.ultra)) {
   .recordContent {
     width: 20%;
   }
