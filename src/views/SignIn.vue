@@ -61,14 +61,14 @@ export default {
       loginModule.clearToken();
     });
     const loginFunc = async () => {
-      if (loginModule.user === "") {
+      if (loginModule.user.value === "") {
         loginModule.normalAlert({
           title: "請輸入帳號",
           status: "fail",
         });
         return;
       }
-      if (loginModule.password === "") {
+      if (loginModule.password.value === "") {
         loginModule.normalAlert({
           title: "請輸入密碼",
           status: "fail",

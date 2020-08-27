@@ -14,7 +14,6 @@
 <script>
 import { ref } from "vue";
 import Login from "@/api/Login.js";
-import Credential from "@/api/Credential.js";
 import router from "@/router";
 import recordlist from "@/components/RecordList.vue";
 export default {
@@ -24,14 +23,13 @@ export default {
   },
   setup() {
     const loginModule = Login();
-    const credentialModule = Credential();
     const getRole = ref(-1);
     if (!loginModule.regainLoginUser()) {
       router.push({
         name: "signIn",
       });
     }
-    getIndexRole.value = loginModule.userData.role;
+    getRole.value = loginModule.userData.role;
     if (getRole.value === -1) {
       console.error("login in success but not get role");
     }
