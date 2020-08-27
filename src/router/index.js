@@ -19,7 +19,12 @@ const routes = [
       },
       {
         path: '/scan',
-        component: () => import(/* webpackChunkName: "Report" */ '../views/home/Scan.vue'),
+        component: () => import(/* webpackChunkName: "Scan" */ '../views/home/Scan.vue'),
+        meta: { authRequired: true, noDirect: true }
+      },
+      {
+        path: '/verifyreport',
+        component: () => import(/* webpackChunkName: "VerifyReport" */ '../views/home/VerifyReport.vue'),
         meta: { authRequired: true, noDirect: true }
       },
     ]

@@ -109,7 +109,7 @@ export default {
           router.push("/report");
           break;
         case 2:
-          // verificator
+          router.push("/scan")
           break;
         case 3:
           router.push("/");
