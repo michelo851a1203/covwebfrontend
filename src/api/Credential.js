@@ -5,6 +5,11 @@ import report from "./global/report.js"
 import credentialData from "./global/credentialData.js"
 
 export default function Credential() {
+    const currentCredStatus = ref({
+        title: "",
+        status: "",
+    });
+
     const attr = computed(() => {
         if (credentialData.attributes.length === 0) {
             return [];
@@ -51,23 +56,38 @@ export default function Credential() {
     const sendIssue = async () => {
         if (sendToUserEmail.value === "") {
             console.error("sendToUserEmails is empty");
-            return false
+            return {
+                success: false,
+                msg: "請填寫使用者信箱"
+            }
         }
         if (credentialData.definitionId === "") {
             console.error("definitionId is empty");
-            return false
+            return {
+                success: false,
+                msg: "尚未取得 definitionId"
+            }
         }
         if (Object.keys(issueData.value).length === 0) {
             console.error("issueData is empty");
-            return false
+            return {
+                success: false,
+                msg: "沒有填寫檢測內容"
+            }
         }
         if (!config.validateEmail(sendToUserEmail.value)) {
             console.error("sendEmail is error");
-            return false
+            return {
+                success: false,
+                msg: "錯誤的信箱格式"
+            }
         }
         if (!lock.value) {
             console.error("not accept to send");
-            return false
+            return {
+                success: false,
+                msg: "請勾選<確認以上資料皆無誤>"
+            }
         }
 
         credentialData.attributes.forEach(item => {
@@ -76,10 +96,16 @@ export default function Credential() {
             }
         })
 
+        currentCredStatus.value.title = "Loading..."
+        currentCredStatus.value.status = "loading"
+
         const response = await CredentialModule.sendCredential(sendToUserEmail.value, credentialData.definitionId, issueData.value)
         if (!response || !response.success) {
             console.error("getCredentialDetail error");
-            return false
+            return {
+                success: false,
+                msg: "請求返回失敗"
+            }
         }
         const responseData = response.data
 
@@ -90,7 +116,10 @@ export default function Credential() {
         report.wallet = responseData.wallet
         report._id = responseData._id
         report.credential = responseData.credential
-        return true
+        return {
+            success: true,
+            msg: "請求返回失敗"
+        }
     }
 
     const sendMailApi = async () => {
@@ -113,5 +142,19 @@ export default function Credential() {
         report._id = detailData._id
         report.credential.values = detailData.values
     }
-    return { report, credentialData, attr, issueData, sendToUserEmail, lock, getCredDefinition, sendIssue, refillRecord, sendMailApi, getUserDetail }
+
+    const closeCredentialAlert = () => {
+        currentCredStatus.value.title = ""
+        currentCredStatus.value.status = ""
+    }
+
+    const normalCredentialAlert = ({ title, status }) => {
+        currentCredStatus.value.title = title
+        currentCredStatus.value.status = status
+        setTimeout(() => {
+            currentCredStatus.value.title = ""
+            currentCredStatus.value.status = ""
+        }, 1500);
+    }
+    return { currentCredStatus, report, credentialData, attr, issueData, sendToUserEmail, lock, getCredDefinition, sendIssue, refillRecord, sendMailApi, getUserDetail, closeCredentialAlert, normalCredentialAlert }
 }

@@ -1,5 +1,11 @@
 <template>
   <div class="flex flex-col items-center">
+    <component
+      v-if="normalCredentialAlert.title !== '' && normalCredentialAlert.status !== ''"
+      @close="closeCredentialAlert"
+      :currentstatus="normalCredentialAlert"
+      :is="alertComponent"
+    ></component>
     <div class="self-start ml-10 mb-4">
       <label>填寫紀錄</label>
     </div>
@@ -39,9 +45,20 @@
 <script>
 import Credential from "@/api/Credential.js";
 import router from "@/router";
+import alert from "@/components/Alert.vue";
+import alertmobile from "@/components/Alertmobile.vue";
+import config from "@/api/request/config.js";
 export default {
   name: "RecordList",
+  components: {
+    alert,
+    alertmobile,
+  },
   async setup() {
+    const alertComponent = ref("alert");
+    if (config.mobileCheck()) {
+      alertComponent.value = "alertmobile";
+    }
     const credentialModule = Credential();
     const oResult = await credentialModule.getCredDefinition();
     if (!oResult) {
@@ -50,12 +67,16 @@ export default {
 
     const sendIssueFunc = async () => {
       const oResult = await credentialModule.sendIssue();
-      if (!oResult) {
+      if (!oResult.success) {
+        credentialModule.normalCredentialAlert({
+          title: oResult.msg,
+          status: "fail",
+        });
         return;
       }
       router.push("/report");
     };
-    return { ...credentialModule, sendIssueFunc };
+    return { ...credentialModule, sendIssueFunc, alertComponent };
   },
 };
 </script>
