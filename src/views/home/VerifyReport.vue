@@ -1,11 +1,18 @@
 <template>
-  <div class="verifyContent py-12 mt-12 shadow-2xl rounded mx-auto bg-white">
+  <div class="verifyContent py-12 mt-12 sm:shadow-2xl sm:rounded mx-auto sm:bg-white">
     <section class="flex items-center justify-around">
       <div class="py-2">
         <table class="text-sm">
-          <tr v-for="item in Object.keys(verifyResult)" :key="item">
+          <tr v-for="item in Object.keys(mainThemeResult)" :key="item">
             <th class="text-left px-3 py-1">{{ item }}</th>
             <td class="text-left text-blue-400 px-3 py-1">{{ verifyResult[item] }}</td>
+          </tr>
+          <tr v-if="proofAttribute.length > 0">
+            <th class="px-3 py-1">attributes</th>
+          </tr>
+          <tr v-for="item in Object.keys(proofAttribute)" :key="item">
+            <th class="text-left px-3 py-1">{{ item }}</th>
+            <td class="text-left text-blue-400 px-3 py-1">{{ proofAttribute[item] }}</td>
           </tr>
         </table>
       </div>
@@ -58,9 +65,15 @@ export default {
 <style scoped lang="postcss">
 .verifyContent {
   min-height: 30vh;
-  width: 50%;
+  width: 100%;
 }
-@media only screen and (min-width: 1400px) {
+
+@media only screen and (min-width: theme(screens.sm)) {
+  .verifyContent {
+    width: 50%;
+  }
+}
+@media only screen and (min-width: theme(screens.ultra)) {
   .verifyContent {
     width: 40%;
   }
