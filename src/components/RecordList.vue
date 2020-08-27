@@ -3,7 +3,7 @@
     <component
       v-if="currentCredStatus.title !== '' && currentCredStatus.status !== ''"
       @close="closeCredentialAlert"
-      :currentstatus="normalCredentialAlert"
+      :currentstatus="currentCredStatus"
       :is="alertComponent"
     ></component>
     <div class="self-start ml-10 mb-4">
@@ -48,7 +48,7 @@ import router from "@/router";
 import alert from "@/components/Alert.vue";
 import alertmobile from "@/components/Alertmobile.vue";
 import config from "@/api/request/config.js";
-import { ref } from "vue"
+import { ref } from "vue";
 export default {
   name: "RecordList",
   components: {
@@ -60,7 +60,13 @@ export default {
     if (config.mobileCheck()) {
       alertComponent.value = "alertmobile";
     }
+
     const credentialModule = Credential();
+    const credentialData = credentialModule.credentialData;
+    if (credentialData.name !== "" && credentialData.attributes.length > 0) {
+      return { ...credentialModule, sendIssueFunc, alertComponent };
+    }
+
     const oResult = await credentialModule.getCredDefinition();
     if (!oResult) {
       return;
