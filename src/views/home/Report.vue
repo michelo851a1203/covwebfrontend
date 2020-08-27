@@ -1,5 +1,5 @@
 <template>
-  <div class="reportContent py-12 mt-12 shadow-2xl rounded mx-auto bg-white">
+  <div class="reportContent py-12 mt-12 sm:shadow-2xl sm:rounded mx-auto sm:bg-white">
     <section class="flex items-center justify-around">
       <div class="py-2">
         <table class="text-sm">
@@ -89,9 +89,15 @@ export default {
 <style scoped lang="postcss">
 .reportContent {
   min-height: 30vh;
-  width: 50%;
+  width: 100%;
 }
-@media only screen and (min-width: 1400px) {
+
+@media only screen and (min-width: theme(screens.sm)) {
+  .reportContent {
+    width: 50%;
+  }
+}
+@media only screen and (min-width: theme(screens.ultra)) {
   .reportContent {
     width: 40%;
   }

@@ -16,9 +16,13 @@ import router from "@/router";
 import alert from "@/components/Alert.vue";
 import alertmobile from "@/components/Alertmobile.vue";
 import config from "@/api/request/config.js";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 export default {
   name: "scanQrcode",
+  components: {
+    alert,
+    alertmobile,
+  },
   setup() {
     const verificationModule = Verification();
     const alertComponent = ref("alert");

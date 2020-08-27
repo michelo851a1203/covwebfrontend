@@ -1,5 +1,5 @@
 <template>
-  <div class="home bg-green-600">
+  <div class="home bg-green-200 sm:bg-green-600">
     <navbar></navbar>
     <router-view></router-view>
   </div>

@@ -10,7 +10,7 @@ export default function Verification() {
     });
 
     const verifyCredentialId = ref("")
-    const sendVerify = () => {
+    const sendVerify = async () => {
         if (verifyCredentialId.value === "") {
             return {
                 success: false,

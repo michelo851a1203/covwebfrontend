@@ -1,5 +1,5 @@
 <template>
-  <div class="recordContent py-12 mt-10 shadow-2xl rounded mx-auto bg-white">
+  <div class="recordContent py-12 mt-10 sm:shadow-2xl sm:rounded mx-auto sm:bg-white">
     <suspense v-if="getRole === 3">
       <template #default>
         <recordlist></recordlist>
@@ -67,8 +67,15 @@ export default {
 <style scoped lang="postcss">
 .recordContent {
   min-height: 30vh;
-  width: 30%;
+  width: 100%;
 }
+
+@media only screen and (min-width: theme(screens.sm)) {
+  .recordContent {
+    width: 30%;
+  }
+}
+
 @media only screen and (min-width: theme(screens.ultra)) {
   .recordContent {
     width: 20%;
