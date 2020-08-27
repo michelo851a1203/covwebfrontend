@@ -56,6 +56,9 @@ export default {
     if (getRole.value === 1) {
       router.push("/report");
     }
+    if (getRole.value === 2) {
+      router.push("/scan");
+    }
     return { getRole };
   },
 };

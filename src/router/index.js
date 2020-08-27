@@ -17,6 +17,11 @@ const routes = [
         component: () => import(/* webpackChunkName: "Report" */ '../views/home/Report.vue'),
         meta: { authRequired: true, noDirect: true }
       },
+      {
+        path: '/scan',
+        component: () => import(/* webpackChunkName: "Report" */ '../views/home/Scan.vue'),
+        meta: { authRequired: true, noDirect: true }
+      },
     ]
   },
   {
@@ -39,6 +44,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  // noDirect avoid to get in illegal router.
   if (!to.meta.noDirect) {
     next({
       name: "signIn"
