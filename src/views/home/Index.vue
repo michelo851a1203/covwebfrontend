@@ -1,5 +1,5 @@
 <template>
-  <div class="recordContent py-12 shadow-2xl rounded mx-auto bg-white">
+  <div class="recordContent py-12 mt-10 shadow-2xl rounded mx-auto bg-white">
     <suspense v-if="getRole === 3">
       <template #default>
         <recordlist></recordlist>

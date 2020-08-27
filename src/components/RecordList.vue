@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center">
     <component
-      v-if="normalCredentialAlert.title !== '' && normalCredentialAlert.status !== ''"
+      v-if="currentCredStatus.title !== '' && currentCredStatus.status !== ''"
       @close="closeCredentialAlert"
       :currentstatus="normalCredentialAlert"
       :is="alertComponent"
@@ -48,6 +48,7 @@ import router from "@/router";
 import alert from "@/components/Alert.vue";
 import alertmobile from "@/components/Alertmobile.vue";
 import config from "@/api/request/config.js";
+import { ref } from "vue"
 export default {
   name: "RecordList",
   components: {

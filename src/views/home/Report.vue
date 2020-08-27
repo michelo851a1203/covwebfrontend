@@ -1,5 +1,5 @@
 <template>
-  <div class="reportContent py-12 shadow-2xl rounded mx-auto bg-white">
+  <div class="reportContent py-12 mt-12 shadow-2xl rounded mx-auto bg-white">
     <section class="flex items-center justify-around">
       <div class="py-2">
         <table class="text-sm">
