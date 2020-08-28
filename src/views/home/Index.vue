@@ -50,15 +50,6 @@ export default {
       });
     }
     getRole.value = loginModule.userData.role;
-    if (getRole.value === -1) {
-      console.error("login in success but not get role");
-    }
-    if (getRole.value === 1) {
-      router.push("/report");
-    }
-    if (getRole.value === 2) {
-      router.push("/scan");
-    }
     return { getRole };
   },
 };

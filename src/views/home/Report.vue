@@ -49,26 +49,12 @@ export default {
         name: "signIn",
       });
     }
-    if (loginModule.userData.role === -1) {
-      console.error("login in success but not get role");
-      return;
-    }
 
     const reportRole = ref(-1);
     reportRole.value = loginModule.userData.role;
-    switch (loginModule.userData.role) {
-      case 1:
-        // user
-        credentialModule.getUserDetail();
-        break;
-      case 2:
-        // verify person
-        break;
-      case 3:
-        // check center
-        break;
-      default:
-        break;
+
+    if (reportRole.value === 1) {
+      credentialModule.getUserDetail();
     }
 
     const backtoRecord = () => {
