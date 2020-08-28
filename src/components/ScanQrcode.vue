@@ -41,12 +41,8 @@ export default {
       }`;
       mainFrame.value.src = frameSrc;
       window.onmessage = async function (e) {
-        console.group(`%c eData`, "color:yellow");
-        console.log(e);
-        console.log(e.data);
-        console.groupEnd();
-        if (e.Data && e.Data !== "") {
-          verificationModule.verifyCredentialId.value = e.Data;
+        if (e.data && typeof(e.data) === "string" && e.data !== "") {
+          verificationModule.verifyCredentialId.value = e.data;
           const oResult = await verificationModule.sendVerify();
           if (!oResult.success) {
             verificationModule.normalVerifyAlert({
