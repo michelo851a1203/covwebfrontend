@@ -35,7 +35,7 @@ export default {
       mainFrame.value.src = frameSrc;
       window.onmessage = async function (e) {
         console.group(`%c eData`,'color:yellow');
-        console.log(eData);
+        console.log(e.Data);
         console.groupEnd();
         if (e.Data.trim() !== "") {
           const oResult = await verificationModule.sendVerify();
