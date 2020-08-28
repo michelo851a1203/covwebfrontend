@@ -156,5 +156,23 @@ export default function Credential() {
             currentCredStatus.value.status = ""
         }, 1500);
     }
-    return { currentCredStatus, report, credentialData, attr, issueData, sendToUserEmail, lock, getCredDefinition, sendIssue, refillRecord, sendMailApi, getUserDetail, closeCredentialAlert, normalCredentialAlert }
+
+    const clearCredentialReport = () => {
+        report.displayName = ""
+        report.role = ""
+        report.updatedAt = ""
+        report.username = ""
+        report.wallet = ""
+        report._id = ""
+        report.credential = {
+            createdAt: -1,
+            credentialId: "",
+            definitionId: "",
+            schemaId: "",
+            state: "",
+            updatedAt: "",
+            values: {}
+        }
+    }
+    return { currentCredStatus, report, credentialData, attr, issueData, sendToUserEmail, lock, getCredDefinition, sendIssue, refillRecord, sendMailApi, getUserDetail, closeCredentialAlert, normalCredentialAlert, clearCredentialReport }
 }

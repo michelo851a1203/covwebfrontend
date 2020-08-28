@@ -53,6 +53,11 @@ export default {
     const reportRole = ref(-1);
     reportRole.value = loginModule.userData.role;
 
+    const keys = Object.keys(credentialModule.report.credential.values);
+    if (keys.length === 0 && reportRole.value === 3) {
+      router.push("/");
+    }
+
     if (reportRole.value === 1) {
       credentialModule.getUserDetail();
     }

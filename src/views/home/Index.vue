@@ -34,6 +34,7 @@
 <script>
 import { ref } from "vue";
 import Login from "@/api/Login.js";
+import Credential from "@/api/Credential.js";
 import router from "@/router";
 import recordlist from "@/components/RecordList.vue";
 export default {
@@ -43,6 +44,8 @@ export default {
   },
   setup() {
     const loginModule = Login();
+    const credentialModule = Credential();
+    credentialModule.clearCredentialReport();
     const getRole = ref(-1);
     if (!loginModule.regainLoginUser()) {
       router.push({
