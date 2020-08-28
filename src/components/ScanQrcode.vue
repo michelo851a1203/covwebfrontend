@@ -6,7 +6,7 @@
       :currentstatus="currentVerifyStatus"
       :is="alertComponent"
     ></component>
-    <iframe src="https://michelo851a1203.github.io/qrcodetool/" frameborder="0"></iframe>
+    <iframe class="mx-auto overflow-hidden" ref="mainFrame" src="https://michelo851a1203.github.io/qrcodetool/" frameborder="0"></iframe>
   </div>
 </template>
 
@@ -25,11 +25,14 @@ export default {
   },
   setup() {
     const verificationModule = Verification();
+    const mainFrame = ref(null);
     const alertComponent = ref("alert");
     if (config.mobileCheck()) {
       alertComponent.value = "alertmobile";
     }
     onMounted(() => {
+      const frameSrc = `https://michelo851a1203.github.io/qrcodetool?w=${window.innerWidth - 20}&h=${window.innerHeight}`;
+      mainFrame.value.src = frameSrc;
       window.onmessage = async function (e) {
         if (e.Data !== "") {
           const oResult = await verificationModule.sendVerify();
@@ -45,53 +48,7 @@ export default {
       };
     });
 
-    return { ...verificationModule, alertComponent };
-    // const scanner = ref(null);
-    // const scanning = ref(false);
-    // const video = document.createElement("video");
-
-    // qrcodePack.callback = (res) => {
-    //   if (res) {
-    //     scanning.value = false;
-    //     console.log(res);
-    //     // video.srcObject.getTracks().forEach((track) => {
-    //     //   track.stop();
-    //     // });
-    //   }
-    // };
-
-    // const tick = () => {
-    //   scanner.value.width = video.videoWidth;
-    //   scanner.value.height = video.videoHeight;
-    //   const ctx = scanner.value.getContext("2d");
-    //   ctx.drawImage(video, 0, 0, scanner.value.width, scanner.value.height);
-    //   scanning.value && requestAnimationFrame(tick);
-    // };
-
-    // const scan = () => {
-    //   try {
-    //     qrcodePack.decode();
-    //   } catch (error) {
-    //     console.error(error);
-    //     setTimeout(scan, 300);
-    //   }
-    // };
-
-    // onMounted(async () => {
-    //   const stream = await navigator.mediaDevices.getUserMedia({
-    //     video: { facingMode: "environment" },
-    //   });
-    //   scanning.value = true;
-    //   video.setAttribute("playsinline", true);
-    //   video.srcObjec = stream;
-    //   video.play();
-    //   // tick();
-    //   // scan();
-    // });
-    // tick();
-    // scan();
-
-    // return { scanner };
+    return { ...verificationModule, alertComponent, mainFrame };
   },
 };
 </script>
