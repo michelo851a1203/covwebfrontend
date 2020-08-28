@@ -1,11 +1,11 @@
 <template>
   <div class="alert">
     <div
-      class="alertContent flex items-center px-6 py-4 rounded shadow-xl bg-gray-300"
+      class="alertContent border border-black flex items-center px-6 py-4 rounded shadow-xl bg-gray-300"
       :class="{ 
-        'bg-red-300':currentstatus.status === 'fail',
-        'bg-green-300':currentstatus.status === 'ok',
-        'bg-gray-300':currentstatus.status === 'loading',
+        'bg-red-300 border-red-600':currentstatus.status === 'fail',
+        'bg-green-300 border-green-600':currentstatus.status === 'ok',
+        'bg-gray-300 border-gray-600':currentstatus.status === 'loading',
       }"
     >
       <div class="break-all">{{ currentstatus.title }}</div>
