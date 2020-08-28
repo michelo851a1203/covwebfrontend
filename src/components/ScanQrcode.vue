@@ -51,7 +51,7 @@ export default {
             });
             return;
           }
-          router.push("/report");
+          router.push("/verifyreport");
         }
       };
     });
