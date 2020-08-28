@@ -34,7 +34,10 @@ export default {
       const frameSrc = `https://michelo851a1203.github.io/qrcodetool?w=${window.innerWidth - 20}`;
       mainFrame.value.src = frameSrc;
       window.onmessage = async function (e) {
-        if (e.Data !== "") {
+        console.group(`%c eData`,'color:yellow');
+        console.log(eData);
+        console.groupEnd();
+        if (e.Data.trim() !== "") {
           const oResult = await verificationModule.sendVerify();
           if (!oResult.success) {
             verificationModule.normalVerifyAlert({
