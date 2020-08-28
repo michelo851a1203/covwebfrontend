@@ -1,5 +1,5 @@
 <template>
-  <div class="verifyContent py-12 mt-12 sm:shadow-2xl sm:rounded mx-auto sm:bg-white">
+  <div class="verifyContent py-12 sm:mt-12 sm:shadow-2xl sm:rounded mx-auto sm:bg-white">
     <section class="flex items-center justify-around">
       <div class="py-2">
         <table class="text-sm">
@@ -7,12 +7,12 @@
             <th class="text-left px-3 py-1">{{ item }}</th>
             <td class="text-left text-blue-400 px-3 py-1">{{ verifyResult[item] }}</td>
           </tr>
-          <tr v-if="proofAttribute.length > 0">
-            <th class="px-3 py-1">attributes</th>
+          <tr v-if="Object.keys(proofAttribute).length > 0">
+            <th class="px-3 py-1 text-center border">attributes</th>
           </tr>
           <tr v-for="item in Object.keys(proofAttribute)" :key="item">
-            <th class="text-left px-3 py-1">{{ item }}</th>
-            <td class="text-left text-blue-400 px-3 py-1">{{ proofAttribute[item] }}</td>
+            <th class="text-left px-3 py-1 border">{{ item }}</th>
+            <td class="text-left text-blue-400 px-3 py-1 border">{{ proofAttribute[item] }}</td>
           </tr>
         </table>
       </div>
