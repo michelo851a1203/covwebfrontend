@@ -12,7 +12,7 @@
     <div v-for="item in attr" :key="item.id" class="mb-4">
       <input
         v-model.lazy.trim="issueData[item.title]"
-        class="border-b-2 border-gray-400 px-4 pt-1 focus:outline-none"
+        class="border-b-2 border-gray-600 placeholder-gray-600 bg-transpatent sm:border-gray-400 px-4 pt-1 focus:outline-none"
         :placeholder="item.title"
         type="text"
       />
