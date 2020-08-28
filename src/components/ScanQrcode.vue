@@ -31,7 +31,7 @@ export default {
       alertComponent.value = "alertmobile";
     }
     onMounted(() => {
-      const frameSrc = `https://michelo851a1203.github.io/qrcodetool?w=${window.innerWidth - 20}&h=${window.innerHeight}`;
+      const frameSrc = `https://michelo851a1203.github.io/qrcodetool?w=${window.innerWidth - 20}`;
       mainFrame.value.src = frameSrc;
       window.onmessage = async function (e) {
         if (e.Data !== "") {
