@@ -22,7 +22,7 @@ export default {
   padding-top: 10vh;
   @apply pb-4;
 }
-@media only screen and (min-width: 1400px) {
+@media only screen and (min-width: theme(screens.ultra)) {
   .home {
     padding-top: 20vh;
   }
