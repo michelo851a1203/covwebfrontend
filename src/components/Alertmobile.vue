@@ -3,7 +3,7 @@
     <transition name="translatetop">
       <div v-if="showani" class="fixed rounded w-full left-0 bottom-0 z-20 w-4/5 px-1">
         <div class="flex flex-col items-center rounded border px-3 py-2 bg-white shadow-lg">
-          <div class="w-full pb-2 text-center border-b-2 border-gray-300">狀態欄</div>
+          <div class="w-full pb-2 text-center border-b-2 border-gray-300">Status</div>
           <div class="py-1">{{ currentstatus.title }}</div>
           <div>
             <!-- loading -->
@@ -97,7 +97,7 @@
             <button
               @click="cancelaction"
               class="overlay w-full bg-gray-500 focus:outline-none hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-full"
-            >取消</button>
+            >Cancel</button>
           </div>
         </div>
       </div>

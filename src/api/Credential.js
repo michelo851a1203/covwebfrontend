@@ -58,35 +58,35 @@ export default function Credential() {
             console.error("sendToUserEmails is empty");
             return {
                 success: false,
-                msg: "請填寫使用者信箱"
+                msg: "User email required"
             }
         }
         if (credentialData.definitionId === "") {
             console.error("definitionId is empty");
             return {
                 success: false,
-                msg: "尚未取得 definitionId"
+                msg: "Not acquire definitionId"
             }
         }
         if (Object.keys(issueData.value).length === 0) {
             console.error("issueData is empty");
             return {
                 success: false,
-                msg: "沒有填寫檢測內容"
+                msg: "Not fill content"
             }
         }
         if (!config.validateEmail(sendToUserEmail.value)) {
             console.error("sendEmail is error");
             return {
                 success: false,
-                msg: "錯誤的信箱格式"
+                msg: "Error email format"
             }
         }
         if (!lock.value) {
             console.error("not accept to send");
             return {
                 success: false,
-                msg: "請勾選<確認以上資料皆無誤>"
+                msg: "Please check <Above Information is correct>"
             }
         }
 
@@ -118,7 +118,7 @@ export default function Credential() {
         report.credential = responseData.credential
         return {
             success: true,
-            msg: "請求返回失敗"
+            msg: "Request failure"
         }
     }
 

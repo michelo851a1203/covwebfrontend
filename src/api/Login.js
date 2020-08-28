@@ -56,12 +56,12 @@ export default function Login() {
     }
 
     const login = async () => {
-        currentStatus.value.title = "登入中"
+        currentStatus.value.title = "Logging"
         currentStatus.value.status = "loading"
         const response = await LoginModules.login(loginList.user, loginList.password)
         if (!response || !response.success) {
             console.error("login error");
-            currentStatus.value.title = "登入失敗"
+            currentStatus.value.title = "Login failure"
             currentStatus.value.status = "fail"
             return false
         }

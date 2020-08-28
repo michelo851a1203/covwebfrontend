@@ -21,7 +21,7 @@
       <button
         @click="backtoScan"
         class="w-1/3 bg-gray-700 focus:outline-none hover:bg-gray-900 text-white font-medium py-2 px-4 rounded"
-      >返回</button>
+      >Back</button>
     </section>
   </div>
 </template>

@@ -3,7 +3,7 @@
     <div class="flex items-center h-full">
       <div class="ml-10">COV-19 TEST</div>
       <div class="ml-auto mr-10">
-        <button @click="logout" class="text-black hover:underline text-lg font-medium py-1 px-2">登出</button>
+        <button @click="logout" class="text-black hover:underline text-lg font-medium py-1 px-2">Log out</button>
       </div>
     </div>
   </div>

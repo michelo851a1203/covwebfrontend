@@ -12,13 +12,13 @@
       <section class="sm:hidden leading-loose text-lg text-center mb-4">
         <p>COVID-19</p>
         <p>Verifiable Credential</p>
-        <p>Wallet</p>
+        <p>Check in</p>
       </section>
       <div class="mb-4">
         <input
           v-model.lazy.trim="user"
           class="bg-gray-300 px-4 py-2 py-1 focus:outline-none rounded"
-          placeholder="輸入帳號..."
+          placeholder="User"
           type="text"
         />
       </div>
@@ -26,7 +26,7 @@
         <input
           v-model.lazy.trim="password"
           class="bg-gray-300 px-4 py-2 focus:outline-none rounded"
-          placeholder="輸入密碼..."
+          placeholder="password"
           type="password"
         />
       </div>
@@ -34,11 +34,11 @@
         <button
           @click="loginFunc"
           class="w-full bg-green-700 focus:outline-none hover:bg-green-900 text-white font-medium py-2 px-4 rounded"
-        >登入</button>
+        >LOGIN</button>
       </div>
       <div class="text-xs">
-        <label for>沒有註冊?</label>
-        <router-link class="text-green-600" to="/register">創建帳號</router-link>
+        <label for>Not Register?</label>
+        <router-link class="text-green-600" to="/register">Create an account</router-link>
       </div>
     </div>
   </div>

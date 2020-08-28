@@ -14,17 +14,17 @@ export default function Verification() {
         if (verifyCredentialId.value === "") {
             return {
                 success: false,
-                msg: "未拿到驗證的 CredentialId",
+                msg: "Not Acquire CredentialId",
             }
         }
-        currentVerifyStatus.value.title = "讀取中..."
+        currentVerifyStatus.value.title = "Loading..."
         currentVerifyStatus.value.status = "loading"
         const response = await VerificationModules.createVerification(verifyCredentialId.value)
         if (!response || !response.success) {
             console.error("createVerification error");
             return {
                 success: false,
-                msg: "請求返回失敗",
+                msg: "Request fail",
             }
         }
         const verData = response.data
@@ -40,7 +40,7 @@ export default function Verification() {
 
         return {
             success: true,
-            msg: "成功",
+            msg: "Success",
         }
     }
 

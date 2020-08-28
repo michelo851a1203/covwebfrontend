@@ -4,13 +4,13 @@
       class="registercontent flex items-center flex-col py-12 shadow-2xl rounded mx-auto bg-white"
     >
       <div class="registertitle self-start mb-4">
-        <label>檢驗中心註冊</label>
+        <label>Test Center Register</label>
       </div>
       <div class="mb-4">
         <input
           v-model.lazy.trim="registerUser"
           class="border-b-2 border-gray-400 px-4 pt-1 focus:outline-none"
-          placeholder="輸入帳號..."
+          placeholder="User"
           type="text"
         />
       </div>
@@ -18,7 +18,7 @@
         <input
           v-model.lazy.trim="registerPassword"
           class="border-b-2 border-gray-400 px-4 pt-1 focus:outline-none"
-          placeholder="輸入密碼..."
+          placeholder="Password"
           type="password"
         />
       </div>
@@ -26,7 +26,7 @@
         <input
           v-model.lazy.trim="registerEmail"
           class="border-b-2 border-gray-400 px-4 pt-1 focus:outline-none"
-          placeholder="信箱..."
+          placeholder="Email"
           type="text"
         />
       </div>
@@ -34,7 +34,7 @@
         <input
           v-model.lazy.trim="registerDisplayName"
           class="border-b-2 border-gray-400 px-4 pt-1 focus:outline-none"
-          placeholder="顯示名稱..."
+          placeholder="DisplayName"
           type="text"
         />
       </div>
@@ -42,11 +42,11 @@
         <button
           @click="refill"
           class="bg-gray-700 focus:outline-none hover:bg-gray-900 text-white font-medium py-2 px-4 rounded"
-        >重填</button>
+        >Reset</button>
         <button
           @click="registerFunc"
           class="bg-green-700 focus:outline-none hover:bg-green-900 text-white font-medium py-2 px-4 rounded"
-        >註冊</button>
+        >Register</button>
       </div>
     </div>
   </div>
