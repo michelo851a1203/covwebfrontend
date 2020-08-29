@@ -3,8 +3,10 @@ import config from "./request/config.js"
 import CredentialModule from "./request/Credential.js"
 import report from "./global/report.js"
 import credentialData from "./global/credentialData.js"
+import navTag from "@/api/global/navTag.js"
 
 export default function Credential() {
+
     const currentCredStatus = ref({
         title: "",
         status: "",
@@ -150,6 +152,7 @@ export default function Credential() {
         report.updatedAt = detailData.updatedAt
         report._id = detailData._id
         report.credential.values = detailData.values
+        navTag.value = "genQrcode"
     }
 
     const closeCredentialAlert = () => {
@@ -183,5 +186,5 @@ export default function Credential() {
             values: {}
         }
     }
-    return { currentCredStatus, report, credentialData, attr, issueData, sendToUserEmail, lock, getCredDefinition, sendIssue, refillRecord, sendMailApi, getUserDetail, closeCredentialAlert, normalCredentialAlert, clearCredentialReport }
+    return { navTag, currentCredStatus, report, credentialData, attr, issueData, sendToUserEmail, lock, getCredDefinition, sendIssue, refillRecord, sendMailApi, getUserDetail, closeCredentialAlert, normalCredentialAlert, clearCredentialReport }
 }

@@ -2,14 +2,24 @@
   <div class="fixed top-0 bg-gray-300 shadow-2xl w-full h-16">
     <div class="flex items-center h-full">
       <div class="ml-10">COV-19 TEST</div>
-      <div v-if="getnavRole !== 3" class="ml-auto mr-4 hover:bg-gray-500 h-full flex items-center">
-        <button class="text-black hover:underline text-lg font-medium py-1 px-2">Scan Qrcode</button>
+      <div
+        @click="changeTag('scanQrcode')"
+        v-if="getnavRole !== 3"
+        :class="{'bg-blue-300':navTag === 'scanQrcode'}"
+        class="ml-auto mr-4 hover:bg-gray-500 h-full flex items-center"
+      >
+        <button class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2">Scan Qrcode</button>
       </div>
-      <div v-if="getnavRole !== 3" class="mr-4 hover:bg-gray-500 h-full flex items-center">
-        <button class="text-black hover:underline text-lg font-medium py-1 px-2">Generate Qrcode</button>
+      <div
+        v-if="getnavRole !== 3"
+        @click="changeTag('genQrcode')"
+        :class="{'bg-blue-300':navTag === 'genQrcode'}"
+        class="mr-4 hover:bg-gray-500 h-full flex items-center"
+      >
+        <button class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2">Generate Qrcode</button>
       </div>
       <div v-if="getnavRole === 1" class="mr-4 hover:bg-blue-300 h-full flex items-center">
-        <button class="text-black hover:underline text-lg font-medium py-1 px-2">Disable Credential</button>
+        <button class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2">Disable Credential</button>
       </div>
       <div :class="{'ml-auto' : getnavRole === 3}" class="mr-10">
         <button
@@ -25,6 +35,7 @@
 import { ref } from "vue";
 import router from "@/router";
 import Login from "@/api/Login.js";
+import Navbar from "@/api/Navbar.js";
 export default {
   name: "Navbar",
   setup() {
@@ -37,7 +48,7 @@ export default {
         name: "signIn",
       });
     };
-    return { logout, getnavRole };
+    return { ...Navbar(), logout, getnavRole };
   },
 };
 </script>
