@@ -23,7 +23,9 @@ export default function Credential() {
         return oData;
     })
 
-    const issueData = ref({})
+    const issueData = ref({
+        "Test Result": ""
+    })
     const sendToUserEmail = ref("")
     const lock = ref(false)
     const getCredDefinition = async () => {
@@ -51,6 +53,7 @@ export default function Credential() {
         Object.keys(issueData.value).forEach(item => {
             issueData.value[item] = ""
         })
+        issueData.value["Test Result"] = ""
     }
 
     const sendIssue = async () => {
@@ -66,6 +69,12 @@ export default function Credential() {
             return {
                 success: false,
                 msg: "Not acquire definitionId"
+            }
+        }
+        if (!issueData.value["Test Result"] || issueData.value["Test Result"] === "") {
+            return {
+                success: false,
+                msg: "Pease choose Test Result"
             }
         }
         if (Object.keys(issueData.value).length === 0) {
