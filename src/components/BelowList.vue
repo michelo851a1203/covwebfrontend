@@ -25,12 +25,14 @@ export default {
       {
         id: 1,
         active: false,
-        type: "Scan",
+        type: "scan",
+        role:[1,2],
       },
       {
         id: 2,
         active: false,
-        type: "Qrcode",
+        type: "qrcode",
+        role:[1,2],
       },
     ]);
 
