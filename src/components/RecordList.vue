@@ -18,7 +18,7 @@
       <input
         v-if="item.title !== 'Test Result'"
         v-model.lazy.trim="issueData[item.title]"
-        class="w-4/5 border-b-2 border-gray-600 placeholder-gray-600 bg-transparent sm:border-gray-400 px-4 pt-1 focus:outline-none"
+        class="w-4/5 ml-10 border-b-2 border-gray-600 placeholder-gray-600 bg-transparent sm:border-gray-400 px-4 pt-1 focus:outline-none"
         :placeholder="item.title"
         type="text"
       />
