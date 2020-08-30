@@ -1,5 +1,5 @@
 <template>
-  <div class="reportContent py-12 mt-12 sm:shadow-2xl sm:rounded mx-auto sm:bg-white">
+  <div class="reportContent py-12 sm:mt-12 sm:shadow-2xl sm:rounded mx-auto sm:bg-white">
     <suspense>
       <template #default>
         <reportlist></reportlist>
