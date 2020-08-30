@@ -34,10 +34,10 @@
         </select>
       </div>
     </div>
-    <div class="mt-6 mb-4">
+    <div class="mt-6 mb-4 w-full">
       <input
         v-model="sendToUserEmail"
-        class="border-b-2 border-gray-600 bg-transparent placeholder-gray-600 px-4 pt-1 focus:outline-none"
+        class="w-4/5 ml-10 border-b-2 border-gray-600 bg-transparent placeholder-gray-600 px-4 pt-1 focus:outline-none"
         placeholder="Email Address"
         type="text"
       />
