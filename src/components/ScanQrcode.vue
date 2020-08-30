@@ -6,7 +6,7 @@
       :currentstatus="currentVerifyStatus"
       :is="alertComponent"
     ></component>
-    <iframe class="mx-auto sm:w-full sm:h-full overflow-hidden" :src="frameSrc" frameborder="0"></iframe>
+    <iframe class="mx-auto w-full h-full overflow-hidden" :src="frameSrc" frameborder="0"></iframe>
   </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
       if (window.innerWidth > 640) {
         frameWidth *= 0.9;
       }
-      frameSrc.value = `${frameSrc.value}?w=${frameWidth - 20}`;
+      frameSrc.value = `${frameSrc.value}?w=${frameWidth - 15}`;
       window.onmessage = async function (e) {
         if (e.data && typeof e.data === "string" && e.data !== "") {
           verificationModule.verifyCredentialId.value = e.data;
