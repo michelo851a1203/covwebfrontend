@@ -23,12 +23,12 @@ export default {
 
 @media only screen and (min-width: theme(screens.sm)) {
   .scanContent {
-    width: 30%;
+    width: 90%;
   }
 }
 @media only screen and (min-width: theme(screens.ultra)) {
   .scanContent {
-    width: 20%;
+    width: 90%;
   }
 }
 </style>

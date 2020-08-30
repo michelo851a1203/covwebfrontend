@@ -17,6 +17,7 @@ import alert from "@/components/Alert.vue";
 import alertmobile from "@/components/Alertmobile.vue";
 import config from "@/api/request/config.js";
 import { onMounted, ref } from "vue";
+
 export default {
   name: "scanQrcode",
   components: {
@@ -31,7 +32,11 @@ export default {
       alertComponent.value = "alertmobile";
     }
     onMounted(() => {
-      frameSrc.value = `${frameSrc.value}?w=${window.innerWidth - 20}`;
+      let frameWidth = window.innerWidth;
+      if (window.innerWidth > 640) {
+        frameWidth *= 0.9;
+      }
+      frameSrc.value = `${frameSrc.value}?w=${frameWidth - 20}`;
       window.onmessage = async function (e) {
         if (e.data && typeof e.data === "string" && e.data !== "") {
           verificationModule.verifyCredentialId.value = e.data;
