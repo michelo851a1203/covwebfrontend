@@ -27,7 +27,7 @@
           class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2"
         >Disable Credential</button>
       </div>
-      <div :class="{'ml-auto' : getnavRole === 3}" class="mr-10">
+      <div :class="{'ml-auto' : getnavRole === 3 && !isMobileRef}" class="mr-10">
         <button
           @click="logout"
           class="text-black hover:underline text-lg font-medium py-1 px-2"
