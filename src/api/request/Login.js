@@ -39,7 +39,7 @@ export default {
             return { success: false }
         }
     },
-    // TODO :使用者詳細資訊
+    // 使用者詳細資訊
     getUserDetail: async () => {
         const cluster = localStorage.getItem("covWebItem")
         const token = localStorage.getItem(cluster)

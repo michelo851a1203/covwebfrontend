@@ -97,7 +97,7 @@ export default function Login() {
         return true
     }
 
-    // TODO 使用者詳細資訊
+    // 使用者詳細資訊
     const getUserDetail = async () => {
         const response = await LoginModules.getUserDetail()
         if (!response || !response.success) {
