@@ -6,12 +6,7 @@
       :currentstatus="currentVerifyStatus"
       :is="alertComponent"
     ></component>
-    <iframe
-      class="mx-auto overflow-hidden"
-      ref="mainFrame"
-      src="https://michelo851a1203.github.io/qrcodetool/"
-      frameborder="0"
-    ></iframe>
+    <iframe class="mx-auto overflow-hidden" :src="frameSrc" frameborder="0"></iframe>
   </div>
 </template>
 
@@ -30,18 +25,15 @@ export default {
   },
   setup() {
     const verificationModule = Verification();
-    const mainFrame = ref(null);
+    const frameSrc = ref("https://michelo851a1203.github.io/qrcodetool");
     const alertComponent = ref("alert");
     if (config.mobileCheck()) {
       alertComponent.value = "alertmobile";
     }
     onMounted(() => {
-      const frameSrc = `https://michelo851a1203.github.io/qrcodetool?w=${
-        window.innerWidth - 20
-      }`;
-      mainFrame.value.src = frameSrc;
+      frameSrc.value = `${frameSrc.value}?w=${window.innerWidth - 20}`;
       window.onmessage = async function (e) {
-        if (e.data && typeof(e.data) === "string" && e.data !== "") {
+        if (e.data && typeof e.data === "string" && e.data !== "") {
           verificationModule.verifyCredentialId.value = e.data;
           const oResult = await verificationModule.sendVerify();
           if (!oResult.success) {
@@ -56,7 +48,7 @@ export default {
       };
     });
 
-    return { ...verificationModule, alertComponent, mainFrame };
+    return { ...verificationModule, alertComponent, frameSrc };
   },
 };
 </script>
