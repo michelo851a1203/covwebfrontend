@@ -2,7 +2,7 @@
   <div class="home bg-green-200 sm:bg-green-600">
     <navbar></navbar>
     <router-view></router-view>
-    <belowlist v-if="isMobileRef"></belowlist>
+    <belowlist v-if="isMobileRef && getmainRole !== 3"></belowlist>
   </div>
 </template>
 
@@ -12,6 +12,7 @@ import { ref } from "vue";
 import navbar from "@/components/Navbar.vue";
 import belowlist from "@/components/BelowList.vue";
 import config from "@/api/request/config.js";
+import Login from "@/api/Login.js";
 export default {
   name: "Home",
   components: {
@@ -20,7 +21,10 @@ export default {
   },
   setup() {
     const isMobileRef = ref(config.mobileCheck());
-    return { isMobileRef };
+    loginModule.regainLoginUser();
+    const getmainRole = ref(-1);
+    getmainRole.value = loginModule.userData.role;
+    return { isMobileRef, getmainRole };
   },
 };
 </script>
