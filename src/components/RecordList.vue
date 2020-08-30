@@ -12,25 +12,27 @@
     <div
       v-for="item in attr"
       :key="item.id"
-      class="mb-4"
+      class="mb-4 w-full"
       :class="{ 'self-start' : item.title == 'Test Result' }"
     >
       <input
         v-if="item.title !== 'Test Result'"
         v-model.lazy.trim="issueData[item.title]"
-        class="border-b-2 border-gray-600 placeholder-gray-600 bg-transpatent sm:border-gray-400 px-4 pt-1 focus:outline-none"
+        class="w-full border-b-2 border-gray-600 placeholder-gray-600 bg-transpatent sm:border-gray-400 px-4 pt-1 focus:outline-none"
         :placeholder="item.title"
         type="text"
       />
-      <select
-        v-model.lazy="issueData[item.title]"
-        v-else
-        class="ml-10 border rounded border-gray-500 px-2 py-1"
-      >
-        <option class="bg-white" value="">please Select</option>
-        <option class="bg-white" value="Detected">Detected</option>
-        <option class="bg-white" value="Nondetected">Nondetected</option>
-      </select>
+      <div class="ml-10" v-else>
+        <label for>Test Result</label>
+        <select
+          v-model.lazy="issueData[item.title]"
+          class="ml-4 border rounded border-gray-500 px-2 py-1"
+        >
+          <option class="bg-white" value>please Select</option>
+          <option class="bg-white" value="Detected">Detected</option>
+          <option class="bg-white" value="Nondetected">Nondetected</option>
+        </select>
+      </div>
     </div>
     <div class="mt-6 mb-4">
       <input

@@ -17,7 +17,7 @@
       <div class="mb-4">
         <input
           v-model.lazy.trim="user"
-          class="bg-gray-300 px-4 py-2 py-1 focus:outline-none rounded"
+          class="w-full bg-gray-300 px-4 py-2 py-1 focus:outline-none rounded"
           placeholder="User"
           type="text"
         />
@@ -25,7 +25,7 @@
       <div class="mb-4">
         <input
           v-model.lazy.trim="password"
-          class="bg-gray-300 px-4 py-2 focus:outline-none rounded"
+          class="w-full bg-gray-300 px-4 py-2 focus:outline-none rounded"
           placeholder="password"
           type="password"
         />
