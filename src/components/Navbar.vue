@@ -4,22 +4,28 @@
       <div class="ml-10">COV-19 TEST</div>
       <div
         @click="changeTag('scanQrcode')"
-        v-if="getnavRole !== 3"
+        v-if="getnavRole !== 3 && !isMobileRef"
         :class="{'bg-blue-300':navTag === 'scanQrcode'}"
         class="ml-auto mr-4 hover:bg-gray-500 h-full flex items-center"
       >
-        <button class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2">Scan Qrcode</button>
+        <button
+          class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2"
+        >Scan Qrcode</button>
       </div>
       <div
-        v-if="getnavRole !== 3"
+        v-if="getnavRole !== 3 && !isMobileRef"
         @click="changeTag('genQrcode')"
         :class="{'bg-blue-300':navTag === 'genQrcode'}"
         class="mr-4 hover:bg-gray-500 h-full flex items-center"
       >
-        <button class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2">Generate Qrcode</button>
+        <button
+          class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2"
+        >Generate Qrcode</button>
       </div>
-      <div v-if="getnavRole === 1" class="mr-4 hover:bg-blue-300 h-full flex items-center">
-        <button class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2">Disable Credential</button>
+      <div v-if="getnavRole === 1 && !isMobileRef" class="mr-4 hover:bg-blue-300 h-full flex items-center">
+        <button
+          class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2"
+        >Disable Credential</button>
       </div>
       <div :class="{'ml-auto' : getnavRole === 3}" class="mr-10">
         <button
@@ -36,9 +42,11 @@ import { ref } from "vue";
 import router from "@/router";
 import Login from "@/api/Login.js";
 import Navbar from "@/api/Navbar.js";
+import config from "@/api/request/config.js";
 export default {
   name: "Navbar",
   setup() {
+    const isMobileRef = ref(config.mobileCheck());
     const loginModule = Login();
     loginModule.regainLoginUser();
     const getnavRole = ref(-1);
@@ -48,7 +56,7 @@ export default {
         name: "signIn",
       });
     };
-    return { ...Navbar(), logout, getnavRole };
+    return { ...Navbar(), logout, getnavRole, isMobileRef };
   },
 };
 </script>
