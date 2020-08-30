@@ -1,5 +1,5 @@
 <template>
-  <div class="scanContent py-12 mt-10 sm:shadow-2xl sm:rounded mx-auto sm:bg-white">
+  <div class="scanContent sm:h-screen py-12 mt-10 sm:shadow-2xl sm:rounded mx-auto sm:bg-white">
     <scanqrcode></scanqrcode>
   </div>
 </template>

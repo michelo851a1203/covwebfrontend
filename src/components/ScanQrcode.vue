@@ -6,7 +6,7 @@
       :currentstatus="currentVerifyStatus"
       :is="alertComponent"
     ></component>
-    <iframe class="mx-auto w-100 overflow-hidden" :src="frameSrc" frameborder="0"></iframe>
+    <iframe class="mx-auto sm:w-full sm:h-full overflow-hidden" :src="frameSrc" frameborder="0"></iframe>
   </div>
 </template>
 
