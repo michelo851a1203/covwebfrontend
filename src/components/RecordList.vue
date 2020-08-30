@@ -18,7 +18,7 @@
       <input
         v-if="item.title !== 'Test Result'"
         v-model.lazy.trim="issueData[item.title]"
-        class="w-full border-b-2 border-gray-600 placeholder-gray-600 bg-transpatent sm:border-gray-400 px-4 pt-1 focus:outline-none"
+        class="w-4/5 border-b-2 border-gray-600 placeholder-gray-600 bg-transparent sm:border-gray-400 px-4 pt-1 focus:outline-none"
         :placeholder="item.title"
         type="text"
       />
@@ -37,7 +37,7 @@
     <div class="mt-6 mb-4">
       <input
         v-model="sendToUserEmail"
-        class="border-b-2 border-gray-600 placeholder-gray-600 px-4 pt-1 focus:outline-none"
+        class="border-b-2 border-gray-600 bg-transparent placeholder-gray-600 px-4 pt-1 focus:outline-none"
         placeholder="Email Address"
         type="text"
       />

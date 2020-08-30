@@ -14,7 +14,7 @@
         <p>Verifiable Credential</p>
         <p>Check in</p>
       </section>
-      <div class="mb-4">
+      <div class="w-4/5 mb-4">
         <input
           v-model.lazy.trim="user"
           class="w-full bg-gray-300 px-4 py-2 py-1 focus:outline-none rounded"
@@ -22,7 +22,7 @@
           type="text"
         />
       </div>
-      <div class="mb-4">
+      <div class="w-4/5 mb-4">
         <input
           v-model.lazy.trim="password"
           class="w-full bg-gray-300 px-4 py-2 focus:outline-none rounded"
