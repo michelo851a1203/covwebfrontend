@@ -21,6 +21,7 @@ export default {
   },
   setup() {
     const isMobileRef = ref(config.mobileCheck());
+    const loginModule = Login();
     loginModule.regainLoginUser();
     const getmainRole = ref(-1);
     getmainRole.value = loginModule.userData.role;
