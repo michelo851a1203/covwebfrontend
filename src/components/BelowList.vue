@@ -1,5 +1,5 @@
 <template>
-  <div class="belowlist sm:hidden" :style="basicHeight">
+  <div class="belowlist sm:hidden">
     <div
       @click="clickBelow(item.id)"
       :class="{ 'belowitemActive' : item.active }"

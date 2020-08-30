@@ -6,7 +6,7 @@
         @click="changeTag('scanQrcode')"
         v-if="getnavRole !== 3 && !isMobileRef"
         :class="{'bg-blue-300':navTag === 'scanQrcode'}"
-        class="hidden sm:block ml-auto mr-4 hover:bg-gray-500 h-full flex items-center"
+        class="hidden sm:flex ml-auto mr-4 hover:bg-gray-500 h-full items-center"
       >
         <button
           class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2"
@@ -16,7 +16,7 @@
         v-if="getnavRole !== 3 && !isMobileRef"
         @click="changeTag('genQrcode')"
         :class="{'bg-blue-300':navTag === 'genQrcode'}"
-        class="hidden sm:block mr-4 hover:bg-gray-500 h-full flex items-center"
+        class="hidden sm:flex mr-4 hover:bg-gray-500 h-full items-center"
       >
         <button
           class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2"
@@ -24,7 +24,7 @@
       </div>
       <div
         v-if="getnavRole === 1 && !isMobileRef"
-        class="hidden sm:block mr-4 hover:bg-blue-300 h-full flex items-center"
+        class="hidden sm:flex mr-4 hover:bg-blue-300 h-full items-center"
       >
         <button
           class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2"
