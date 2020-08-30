@@ -6,7 +6,7 @@
         @click="changeTag('scanQrcode')"
         v-if="getnavRole !== 3 && !isMobileRef"
         :class="{'bg-blue-300':navTag === 'scanQrcode'}"
-        class="ml-auto mr-4 hover:bg-gray-500 h-full flex items-center"
+        class="hidden sm:block ml-auto mr-4 hover:bg-gray-500 h-full flex items-center"
       >
         <button
           class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2"
@@ -16,18 +16,21 @@
         v-if="getnavRole !== 3 && !isMobileRef"
         @click="changeTag('genQrcode')"
         :class="{'bg-blue-300':navTag === 'genQrcode'}"
-        class="mr-4 hover:bg-gray-500 h-full flex items-center"
+        class="hidden sm:block mr-4 hover:bg-gray-500 h-full flex items-center"
       >
         <button
           class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2"
         >Generate Qrcode</button>
       </div>
-      <div v-if="getnavRole === 1 && !isMobileRef" class="mr-4 hover:bg-blue-300 h-full flex items-center">
+      <div
+        v-if="getnavRole === 1 && !isMobileRef"
+        class="hidden sm:block mr-4 hover:bg-blue-300 h-full flex items-center"
+      >
         <button
           class="text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2"
         >Disable Credential</button>
       </div>
-      <div :class="{'ml-auto' : (getnavRole === 3 || isMobileRef)}" class="mr-10">
+      <div :class="{'ml-auto' : getnavRole === 3,'ml-auto sm:ml-0':getnavRole !== 3}" class="mr-10">
         <button
           @click="logout"
           class="text-black hover:underline text-lg font-medium py-1 px-2"

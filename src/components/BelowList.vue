@@ -1,5 +1,5 @@
 <template>
-  <div class="belowlist" :style="basicHeight">
+  <div class="belowlist sm:hidden" :style="basicHeight">
     <div
       @click="clickBelow(item.id)"
       :class="{ 'belowitemActive' : item.active }"
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { ref } from "vue"
 import svgcomponent from "@/components/SvgComponent.vue";
 export default {
   name: "BelowList",

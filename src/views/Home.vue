@@ -2,16 +2,25 @@
   <div class="home bg-green-200 sm:bg-green-600">
     <navbar></navbar>
     <router-view></router-view>
+    <belowlist v-if="isMobileRef"></belowlist>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import { ref } from "vue";
 import navbar from "@/components/Navbar.vue";
+import belowlist from "@/components/BelowList.vue";
+import config from "@/api/request/config.js";
 export default {
   name: "Home",
   components: {
     navbar,
+    belowlist,
+  },
+  setup() {
+    const isMobileRef = ref(config.mobileCheck());
+    return { isMobileRef };
   },
 };
 </script>
