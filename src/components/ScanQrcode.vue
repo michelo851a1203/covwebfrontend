@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sm:h-full">
     <component
       v-if="currentVerifyStatus.title !== '' && currentVerifyStatus.status !== ''"
       @close="closeVerifyAlert"
