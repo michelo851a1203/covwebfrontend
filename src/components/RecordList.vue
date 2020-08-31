@@ -29,8 +29,8 @@
           class="ml-4 border rounded border-gray-500 px-2 py-1"
         >
           <option class="bg-white" value>please Select</option>
-          <option class="bg-white" value="Detected">Detected</option>
-          <option class="bg-white" value="Nondetected">Nondetected</option>
+          <option class="bg-white" value="DETECTED">Detected</option>
+          <option class="bg-white" value="NONDETECTED">Nondetected</option>
         </select>
       </div>
     </div>
