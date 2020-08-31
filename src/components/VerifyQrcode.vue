@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div
+    <div class="qrcodepos"
       v-if="verifyReturnData.verificationId === '' && verifyReturnData.policy.attributes.length === 0"
     >
-      <genqrcode
+      <genqrcode class="qrcodeContent"
         v-if="verifyQrcodeForUser !== ''"
         :qrStr="verifyQrcodeForUser"
         width="200"
@@ -130,9 +130,16 @@ export default {
 </script>
 
 <style scoped lang="postcss">
+.qrcodepos{
+  padding-left: 50%;
+}
+.qrcodepos div{
+  transform: translateX(-60%);
+}
 .failinfo {
   @apply rounded bg-blue-300;
   width: 200px;
   height: 200px;
 }
+
 </style>
