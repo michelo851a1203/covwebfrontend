@@ -26,6 +26,14 @@
             class="text-left text-blue-400 px-3 py-1"
           >{{ verifyReturnData.proof[verifyReturnData.policy.attributes[0].policyName].attributes[item] }}</td>
         </tr>
+        <tr>
+          <td class="text-center px-3 py-1" colspan="2">
+            <button
+              @click="printVerify"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
+            >Print</button>
+          </td>
+        </tr>
       </table>
     </div>
   </div>
@@ -48,6 +56,7 @@ export default {
     } = Verification();
 
     const verifyReturnData = reactive({
+      _id: "",
       verificationId: "",
       definitionId: "",
       state: "",
@@ -70,6 +79,7 @@ export default {
       });
       return oDatta;
     });
+
     let intTmp = null;
     const response = await genQrcodeForUser();
     if (response.success) {
@@ -84,6 +94,7 @@ export default {
           ) {
             const returnVerData = keepResponse.data.verification;
 
+            verifyReturnData._id = returnVerData._id;
             verifyReturnData.verificationId = returnVerData.verificationId;
             verifyReturnData.definitionId = returnVerData.definitionId;
             verifyReturnData.state = returnVerData.state;
@@ -98,12 +109,21 @@ export default {
         }
       }, 800);
     }
+
+    const printVerify = () => {
+      if (verifyReturnData._id && verifyReturnData._id !== "") {
+        const cluster = localStorage.getItem("covWebItem");
+        const token = localStorage.getItem(cluster);
+        window.location = `raygate://a910/printer?verificationId=${verifyReturnData._id}&token=${token}`;
+      }
+    };
     return {
       verifyReturnData,
       mainVerifyResult,
       verifyQrcodeForUser,
       genQrcodeForUser,
       keepGetQrcodeInfo,
+      printVerify,
     };
   },
 };

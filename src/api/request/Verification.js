@@ -103,7 +103,7 @@ export default {
             return { success: false }
         }
     },
-    // TODO 取得列印的驗證資料 (print)
+    // 取得列印的驗證資料 (print) no need to use
     PrintVerification: async (verificationId) => {
         const cluster = localStorage.getItem("covWebItem")
         const token = localStorage.getItem(cluster)
