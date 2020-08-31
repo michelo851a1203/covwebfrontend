@@ -23,17 +23,23 @@
         >Generate Qrcode</button>
       </div>
       <div
-        :class="{'ml-auto sm:ml-0': getnavRole === 2 }"
+        @click="triggerEnableCredential"
+        :class="{ 'ml-auto sm:ml-0': getnavRole === 2 }"
         v-if="getnavRole === 1"
-        class="flex mr-4 hover:bg-blue-300 h-full items-center"
+        class="flex mr-4 hover:sm:bg-blue-300 h-full items-center"
       >
         <button
           class="hidden sm:inline text-black focus:outline-none hover:underline text-lg font-medium py-1 px-2"
         >
-          <label for>Disable Credential</label>
+          <label for>{{ credStatusName }}</label>
         </button>
         <label class="switch inline-block sm:hidden">
-          <input type="checkbox" checked />
+          <input
+            type="checkbox"
+            true-value="Disable Credential"
+            false-value="Enable Credential"
+            v-model="credStatusName"
+          />
           <span class="slider round"></span>
         </label>
       </div>

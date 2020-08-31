@@ -2,6 +2,7 @@ import navTag from "@/api/global/navTag.js"
 import { ref, watch } from "vue"
 export default function navbar(initialValue) {
     const showTypeRef = ref(initialValue);
+    const credStatusName = ref("Disable Credential")
     const list = ref([
         {
             id: 1,
@@ -55,5 +56,14 @@ export default function navbar(initialValue) {
         }
     })
 
-    return { list, showTypeRef, navTag, changeTag, clickBelow }
+    const triggerEnableCredential = () => {
+        if (window.innerWidth <= 640) {
+            return
+        }
+        const statusA = "Disable Credential"
+        const statusB = "Enable Credential"
+        credStatusName.value = credStatusName.value === statusA ? statusB : statusA
+    }
+
+    return { list, showTypeRef, navTag, credStatusName, changeTag, clickBelow, triggerEnableCredential }
 }
