@@ -13,42 +13,32 @@
 </template>
 
 <script>
-import { ref } from "vue"
+import Login from "@/api/Login.js";
 import svgcomponent from "@/components/SvgComponent.vue";
+import Navbar from "@/api/Navbar.js";
 export default {
   name: "BelowList",
   components: {
     svgcomponent,
   },
   setup() {
-    const list = ref([
-      {
-        id: 1,
-        active: false,
-        type: "scan",
-        role:[1,2],
-      },
-      {
-        id: 2,
-        active: false,
-        type: "qrcode",
-        role:[1,2],
-      },
-    ]);
-
-    const clickBelow = (id) => {
-      const listIndex = list.value.findIndex((item) => item.id === id);
-      if (listIndex === -1) {
-        return;
-      }
-      list.value[listIndex].active = true;
-      list.value.forEach((item) => {
-        if (item.id !== id) {
-          item.active = false;
-        }
-      });
-    };
-    return { list, clickBelow };
+    const loginModule = Login();
+    loginModule.regainLoginUser();
+    let NavbarModule = null;
+    switch (loginModule.userData.role) {
+      case 1:
+        NavbarModule = Navbar("reportlist")
+        break;
+      case 2:
+        NavbarModule = Navbar("scanqrcode")
+        break;
+      case 3:
+        console.error("get wrong role error");
+        break;
+      default:
+        break;
+    }
+    return { ...NavbarModule };
   },
 };
 </script>
