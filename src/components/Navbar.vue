@@ -75,7 +75,12 @@ export default {
         name: "signIn",
       });
     };
-    return { ...Navbar(), logout, getnavRole, isMobileRef };
+    const initial = getnavRole.value === 2 ? "scanqrcode" : "reportlist";
+    const NavbarModule = Navbar({
+      initial,
+      role: getnavRole.value,
+    });
+    return { ...NavbarModule, logout, getnavRole, isMobileRef };
   },
 };
 </script>

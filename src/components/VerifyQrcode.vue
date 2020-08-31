@@ -1,0 +1,118 @@
+<template>
+  <div>
+    <div
+      v-if="verifyReturnData.verificationId === '' && verifyReturnData.policy.attributes.length === 0"
+    >
+      <genqrcode
+        v-if="verifyQrcodeForUser !== ''"
+        :qrStr="verifyQrcodeForUser"
+        width="200"
+        height="200"
+      ></genqrcode>
+      <div v-else class="failinfo">Qrcode generated fail</div>
+    </div>
+    <div v-else>
+      <table class="text-sm">
+        <tr v-for="item in Object.keys(mainVerifyResult)" :key="item">
+          <th class="text-left px-3 py-1">{{ item }}</th>
+          <td class="text-left text-blue-400 px-3 py-1">{{ mainVerifyResult[item] }}</td>
+        </tr>
+        <tr v-if="verifyReturnData.policy.attributes.length > 0">
+          <th colspan="2" class="text-center px-3 py-1">attributes</th>
+        </tr>
+        <tr v-for="item in verifyReturnData.policy.attributes[0].attributeNames" :key="item">
+          <th class="text-left px-3 py-1">{{ item }}</th>
+          <td
+            class="text-left text-blue-400 px-3 py-1"
+          >{{ verifyReturnData.proof[verifyReturnData.policy.attributes[0].policyName].attributes[item] }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</template>
+
+<script>
+import genqrcode from "@/components/GenQrcode.vue";
+import Verification from "@/api/Verification.js";
+import { reactive, computed } from "vue";
+export default {
+  name: "VerifyQrcode",
+  components: {
+    genqrcode,
+  },
+  async setup() {
+    const {
+      verifyQrcodeForUser,
+      genQrcodeForUser,
+      keepGetQrcodeInfo,
+    } = Verification();
+
+    const verifyReturnData = reactive({
+      verificationId: "",
+      definitionId: "",
+      state: "",
+      createdAt: -1,
+      updatedAt: -1,
+      policy: {
+        name: "",
+        version: "",
+        attributes: [],
+      },
+      proof: {},
+    });
+
+    const mainVerifyResult = computed(() => {
+      const oDatta = {};
+      Object.keys(verifyReturnData).forEach((item) => {
+        if (item !== "policy" && item !== "proof") {
+          oDatta[item] = verifyReturnData[item];
+        }
+      });
+      return oDatta;
+    });
+    let intTmp = null;
+    const response = await genQrcodeForUser();
+    if (response.success) {
+      intTmp = setInterval(async () => {
+        const keepResponse = await keepGetQrcodeInfo(verifyQrcodeForUser.value);
+        if (keepResponse.success === true && keepResponse.data) {
+          // step 2 : all is okay
+          if (
+            keepResponse.data.step &&
+            keepResponse.data.step === 2 &&
+            keepResponse.data.verification
+          ) {
+            const returnVerData = keepResponse.data.verification;
+
+            verifyReturnData.verificationId = returnVerData.verificationId;
+            verifyReturnData.definitionId = returnVerData.definitionId;
+            verifyReturnData.state = returnVerData.state;
+            verifyReturnData.createdAt = returnVerData.createdAt;
+            verifyReturnData.updatedAt = returnVerData.updatedAt;
+            verifyReturnData.policy = returnVerData.policy;
+            verifyReturnData.proof = returnVerData.proof;
+
+            verifyReturnData.clearInterval(intTmp);
+            intTmp = null;
+          }
+        }
+      }, 800);
+    }
+    return {
+      verifyReturnData,
+      mainVerifyResult,
+      verifyQrcodeForUser,
+      genQrcodeForUser,
+      keepGetQrcodeInfo,
+    };
+  },
+};
+</script>
+
+<style scoped lang="postcss">
+.failinfo {
+  @apply rounded bg-blue-300;
+  width: 200px;
+  height: 200px;
+}
+</style>

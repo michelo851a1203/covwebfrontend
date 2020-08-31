@@ -27,10 +27,16 @@ export default {
     let NavbarModule = null;
     switch (loginModule.userData.role) {
       case 1:
-        NavbarModule = Navbar("reportlist")
+        NavbarModule = Navbar({
+          initial: "reportlist",
+          role: 1,
+        });
         break;
       case 2:
-        NavbarModule = Navbar("scanqrcode")
+        NavbarModule = Navbar({
+          initial: "scanqrcode",
+          role: 2,
+        });
         break;
       case 3:
         console.error("get wrong role error");

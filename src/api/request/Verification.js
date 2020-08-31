@@ -53,6 +53,7 @@ export default {
         }
     },
     // TODO 驗證者使用： 取得驗證 qrcode 目前的狀態資訊
+    // this method will get current info and keep request after genQrcode (setInterval)
     getVerifyQrcodeInfo: async (verificationQrcodeId) => {
         const cluster = localStorage.getItem("covWebItem")
         const token = localStorage.getItem(cluster)
@@ -79,7 +80,7 @@ export default {
         }
     },
     // TODO 驗證者使用： 產生驗證用 Qrcode 資訊，給使用者做掃描使用。
-    createVerifyQrcodeForUser: async (verificationId) => {
+    createVerifyQrcodeForUser: async () => {
         const cluster = localStorage.getItem("covWebItem")
         const token = localStorage.getItem(cluster)
         if (!cluster || !token || cluster === "" || token === "") {
@@ -95,9 +96,7 @@ export default {
                     Authorization: token
                 }
             })
-            const { data } = await instance.post(url, {
-                verificationId
-            })
+            const { data } = await instance.post(url)
             return data
         } catch (error) {
             console.error(`error : ${error}`);

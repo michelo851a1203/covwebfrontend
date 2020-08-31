@@ -10,6 +10,7 @@ export default function Verification() {
     });
 
     const verifyCredentialId = ref("")
+    const verifyQrcodeForUser = ref("")
     const sendVerify = async () => {
         if (verifyCredentialId.value === "") {
             return {
@@ -72,5 +73,38 @@ export default function Verification() {
         }, 1500);
     }
 
-    return { verifyResult, mainThemeResult, proofAttribute, currentVerifyStatus, verifyCredentialId, sendVerify, closeVerifyAlert, normalVerifyAlert }
+    const genQrcodeForUser = async () => {
+        const response = await VerificationModules.createVerifyQrcodeForUser()
+        if (!response || !response.success) {
+            console.error("createVerification error");
+            return {
+                success: false,
+                msg: "Request fail",
+            }
+        }
+        verifyQrcodeForUser.value = response.data.verificationId
+
+        return {
+            success: true,
+            msg: "Success",
+        }
+    }
+
+    const keepGetQrcodeInfo = async (verificationQrcodeId) => {
+        const response = await VerificationModules.getVerifyQrcodeInfo(verificationQrcodeId)
+        if (!response || !response.success) {
+            console.error("createVerification error");
+            return {
+                success: false,
+                data: "Request fail",
+            }
+        }
+
+        return {
+            success: true,
+            data: response.data,
+        }
+    }
+
+    return { verifyResult, mainThemeResult, proofAttribute, currentVerifyStatus, verifyCredentialId, verifyQrcodeForUser, sendVerify, closeVerifyAlert, normalVerifyAlert, genQrcodeForUser, keepGetQrcodeInfo }
 }

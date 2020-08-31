@@ -1,8 +1,9 @@
 import navTag from "@/api/global/navTag.js"
 import { ref, watch } from "vue"
-export default function navbar(initialValue) {
-    const showTypeRef = ref(initialValue);
+export default function navbar({ initial, role }) {
+    const showTypeRef = ref(initial);
     const credStatusName = ref("Disable Credential")
+    const showComponent = role === 1 ? "reportList".toLowerCase() : "verifyQrcode".toLowerCase()
     const list = ref([
         {
             id: 1,
@@ -12,7 +13,7 @@ export default function navbar(initialValue) {
         },
         {
             id: 2,
-            active: showTypeRef.value === "reportList".toLowerCase(),
+            active: showTypeRef.value === showComponent,
             type: "qrcode",
             role: [1, 2],
         },
