@@ -2,7 +2,7 @@ import config from "./config.js"
 import axios from "axios"
 
 export default {
-    // TODO :(postpone) 驗證者使用： 取得驗證列表
+    // (postpone) 驗證者使用： 取得驗證列表
     getVerificationList: async () => {
         const cluster = localStorage.getItem("covWebItem")
         const token = localStorage.getItem(cluster)
@@ -103,6 +103,32 @@ export default {
             return { success: false }
         }
     },
+    // TODO:使者使用： 掃描 Qrcode 取得驗證 id， 發送驗證驗證資訊
+    UserVerification: async (verificationId) => {
+        const cluster = localStorage.getItem("covWebItem")
+        const token = localStorage.getItem(cluster)
+        if (!cluster || !token || cluster === "" || token === "") {
+            console.error("no Authorization");
+            return
+        }
+
+        try {
+            const url = "/api/v1/wallet/verification"
+            const instance = axios.create({
+                baseURL: config.baseURL,
+                headers: {
+                    Authorization: token
+                }
+            })
+            const { data } = await instance.post(url, {
+                verificationId
+            })
+            return data
+        } catch (error) {
+            console.error(`error : ${error}`);
+            return { success: false }
+        }
+    },
     // 取得列印的驗證資料 (print) no need to use
     PrintVerification: async (verificationId) => {
         const cluster = localStorage.getItem("covWebItem")
@@ -129,5 +155,4 @@ export default {
             return { success: false }
         }
     }
-
 }

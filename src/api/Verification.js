@@ -106,5 +106,27 @@ export default function Verification() {
         }
     }
 
-    return { verifyResult, mainThemeResult, proofAttribute, currentVerifyStatus, verifyCredentialId, verifyQrcodeForUser, sendVerify, closeVerifyAlert, normalVerifyAlert, genQrcodeForUser, keepGetQrcodeInfo }
+    const userScanQrcode = async () => {
+        if (verifyCredentialId.value === "") {
+            return {
+                success: false,
+                msg: "Not Acquire CredentialId",
+            }
+        }
+        currentVerifyStatus.value.title = "Loading..."
+        currentVerifyStatus.value.status = "loading"
+        const response = await VerificationModules.UserVerification(verifyCredentialId.value)
+        if (!response || !response.success) {
+            console.error("createVerification error");
+            return {
+                success: false,
+                msg: "Request fail",
+            }
+        }
+        return {
+            success: true,
+        }
+    }
+
+    return { verifyResult, mainThemeResult, proofAttribute, currentVerifyStatus, verifyCredentialId, verifyQrcodeForUser, sendVerify, closeVerifyAlert, normalVerifyAlert, genQrcodeForUser, keepGetQrcodeInfo, userScanQrcode }
 }
