@@ -24,7 +24,7 @@
       </div>
       <div
         @click="triggerEnableCredential"
-        :class="{ 'ml-auto sm:ml-0': getnavRole === 2 }"
+        :class="{ 'ml-auto sm:ml-0': getnavRole === 1 }"
         v-if="getnavRole === 1"
         class="flex mr-4 hover:sm:bg-blue-300 h-full items-center"
       >
