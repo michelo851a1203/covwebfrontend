@@ -73,6 +73,9 @@ export default {
             const { data } = await instance.get(url, {
                 verificationQrcodeId
             })
+            console.group(`%c getVerifyQrcodeInfo`,'color:yellow');
+            console.log(data);
+            console.groupEnd();
             return data
         } catch (error) {
             console.error(`error : ${error}`);
@@ -97,6 +100,9 @@ export default {
                 }
             })
             const { data } = await instance.post(url)
+            console.group(`%c createVerifyQrcodeForUser`,'color:yellow');
+            console.log(data);
+            console.groupEnd();
             return data
         } catch (error) {
             console.error(`error : ${error}`);
@@ -123,6 +129,9 @@ export default {
             const { data } = await instance.post(url, {
                 verificationId
             })
+            console.group(`%c UserVerification`,'color:yellow');
+            console.log(data);
+            console.groupEnd();
             return data
         } catch (error) {
             console.error(`error : ${error}`);

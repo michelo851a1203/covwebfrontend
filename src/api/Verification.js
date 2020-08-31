@@ -1,9 +1,10 @@
 
 import VerificationModules from "./request/Verification.js"
 import verifyResult from "./global/verifyResult.js"
-import { ref, computed } from "vue"
+import { ref, computed, onUnmounted } from "vue"
 export default function Verification() {
 
+    const tmpInterval = ref(null)
     const currentVerifyStatus = ref({
         title: "",
         status: "",
@@ -127,6 +128,12 @@ export default function Verification() {
             success: true,
         }
     }
+    onUnmounted(() => {
+        if (tmpInterval.value) {
+            clearInterval(tmpInterval.value)
+            tmpInterval.value = null
+        }
+    })
 
-    return { verifyResult, mainThemeResult, proofAttribute, currentVerifyStatus, verifyCredentialId, verifyQrcodeForUser, sendVerify, closeVerifyAlert, normalVerifyAlert, genQrcodeForUser, keepGetQrcodeInfo, userScanQrcode }
+    return { tmpInterval, verifyResult, mainThemeResult, proofAttribute, currentVerifyStatus, verifyCredentialId, verifyQrcodeForUser, sendVerify, closeVerifyAlert, normalVerifyAlert, genQrcodeForUser, keepGetQrcodeInfo, userScanQrcode }
 }

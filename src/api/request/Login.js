@@ -12,9 +12,6 @@ export default {
                 username,
                 password
             })
-            console.group(`%c login`, 'color:yellow');
-            console.log(data);
-            console.groupEnd();
             return data
         } catch (error) {
             console.error(`error : ${error}`);

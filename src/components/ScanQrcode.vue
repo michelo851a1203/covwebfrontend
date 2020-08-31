@@ -17,6 +17,7 @@ import router from "@/router";
 import alert from "@/components/Alert.vue";
 import alertmobile from "@/components/Alertmobile.vue";
 import config from "@/api/request/config.js";
+import navTag from "@/api/global/navTag.js"
 import { onMounted, ref } from "vue";
 
 export default {
@@ -46,6 +47,7 @@ export default {
         frameWidth *= 0.9;
       }
       frameSrc.value = `${frameSrc.value}?w=${frameWidth - 15}`;
+      navTag.value = "scanQrcode"
       window.onmessage = async function (e) {
         if (e.data && typeof e.data === "string" && e.data !== "") {
           verificationModule.verifyCredentialId.value = e.data;

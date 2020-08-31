@@ -50,6 +50,7 @@ export default {
   },
   async setup() {
     const {
+      tmpInterval,
       verifyQrcodeForUser,
       genQrcodeForUser,
       keepGetQrcodeInfo,
@@ -80,10 +81,9 @@ export default {
       return oDatta;
     });
 
-    let intTmp = null;
     const response = await genQrcodeForUser();
     if (response.success) {
-      intTmp = setInterval(async () => {
+      tmpInterval.value = setInterval(async () => {
         const keepResponse = await keepGetQrcodeInfo(verifyQrcodeForUser.value);
         if (keepResponse.success === true && keepResponse.data) {
           // step 2 : all is okay
@@ -102,9 +102,9 @@ export default {
             verifyReturnData.updatedAt = returnVerData.updatedAt;
             verifyReturnData.policy = returnVerData.policy;
             verifyReturnData.proof = returnVerData.proof;
-
-            verifyReturnData.clearInterval(intTmp);
-            intTmp = null;
+            
+            clearInterval(tmpInterval.value);
+            tmpInterval.value = null;
           }
         }
       }, 800);

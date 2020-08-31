@@ -50,7 +50,7 @@ export default function navbar({ initial, role }) {
                 showTypeRef.value = "scanQrcode".toLowerCase()
                 break;
             case "genQrcode":
-                showTypeRef.value = "reportList".toLowerCase()
+                showTypeRef.value = showComponent
                 break;
             default:
                 break;
