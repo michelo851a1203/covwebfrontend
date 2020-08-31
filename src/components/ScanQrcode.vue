@@ -49,9 +49,10 @@ export default {
       window.onmessage = async function (e) {
         if (e.data && typeof e.data === "string" && e.data !== "") {
           verificationModule.verifyCredentialId.value = e.data;
+          let oResult = null;
           switch (scanRole) {
             case 1:
-              const oResult = await verificationModule.userScanQrcode();
+              oResult = await verificationModule.userScanQrcode();
               if (!oResult.success) {
                 verificationModule.normalVerifyAlert({
                   title: oResult.msg,
@@ -60,12 +61,12 @@ export default {
                 return;
               }
               verificationModule.normalVerifyAlert({
-                  title: "send success",
-                  status: "ok",
-                });
+                title: "send success",
+                status: "ok",
+              });
               break;
             case 2:
-              const oResult = await verificationModule.sendVerify();
+              oResult = await verificationModule.sendVerify();
               if (!oResult.success) {
                 verificationModule.normalVerifyAlert({
                   title: oResult.msg,
