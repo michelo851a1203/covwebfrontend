@@ -2,7 +2,7 @@
   <div class="reportContent py-12 sm:mt-12 sm:shadow-2xl sm:rounded mx-auto sm:bg-white">
     <suspense>
       <template #default>
-        <reportlist></reportlist>
+        <component :is="showTypeRef"></component>
       </template>
       <template #fallback>
         <div class="flex items-center px-6 py-4">
@@ -33,20 +33,25 @@
 
 <script>
 import Login from "@/api/Login.js";
+import Navbar from "@/api/Navbar.js";
 import reportlist from "@/components/ReportList.vue";
+import scanqrcode from "@/components/ScanQrcode.vue";
 import router from "@/router";
 export default {
   name: "report",
   components: {
     reportlist,
+    scanqrcode,
   },
   setup() {
     const loginModule = Login();
+    const NavbarModule = Navbar();
     if (!loginModule.regainLoginUser()) {
       router.push({
         name: "signIn",
       });
     }
+    return { ...NavbarModule };
   },
 };
 </script>
