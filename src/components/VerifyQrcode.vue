@@ -134,7 +134,7 @@ export default {
   padding-left: 50%;
 }
 .qrcodepos div{
-  transform: translateX(-60%);
+  transform: translateX(-50%);
 }
 .failinfo {
   @apply rounded bg-blue-300;
