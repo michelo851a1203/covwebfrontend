@@ -63,17 +63,15 @@ export default {
         }
 
         try {
-            const url = "/api/v1/verification/qrcode"
+            const url = `/api/v1/verification/qrcode?verificationQrcodeId=${verificationQrcodeId}`
             const instance = axios.create({
                 baseURL: config.baseURL,
                 headers: {
                     Authorization: token
                 }
             })
-            const { data } = await instance.get(url, {
-                verificationQrcodeId
-            })
-            console.group(`%c getVerifyQrcodeInfo`,'color:yellow');
+            const { data } = await instance.get(url)
+            console.group(`%c getVerifyQrcodeInfo`, 'color:yellow');
             console.log(data);
             console.groupEnd();
             return data
@@ -100,7 +98,7 @@ export default {
                 }
             })
             const { data } = await instance.post(url)
-            console.group(`%c createVerifyQrcodeForUser`,'color:yellow');
+            console.group(`%c createVerifyQrcodeForUser`, 'color:yellow');
             console.log(data);
             console.groupEnd();
             return data
@@ -129,7 +127,7 @@ export default {
             const { data } = await instance.post(url, {
                 verificationId
             })
-            console.group(`%c UserVerification`,'color:yellow');
+            console.group(`%c UserVerification`, 'color:yellow');
             console.log(data);
             console.groupEnd();
             return data

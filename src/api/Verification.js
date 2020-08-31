@@ -94,7 +94,7 @@ export default function Verification() {
     const keepGetQrcodeInfo = async (verificationQrcodeId) => {
         const response = await VerificationModules.getVerifyQrcodeInfo(verificationQrcodeId)
         if (!response || !response.success) {
-            console.error("createVerification error");
+            console.error("keepGetQrcodeInfo error");
             return {
                 success: false,
                 data: "Request fail",
