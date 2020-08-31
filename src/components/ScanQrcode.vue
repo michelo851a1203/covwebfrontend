@@ -33,13 +33,13 @@ export default {
     if (config.mobileCheck()) {
       alertComponent.value = "alertmobile";
     }
-    if (!loginModule.regainLoginUser()) {
+    if (!LoginModule.regainLoginUser()) {
       router.push({
         name: "signIn",
       });
     }
 
-    const scanRole = loginModule.userData.role;
+    const scanRole = LoginModule.userData.role;
     onMounted(() => {
       let frameWidth = window.innerWidth;
       if (window.innerWidth > 640) {
