@@ -45,7 +45,7 @@ export default {
   },
   setup() {
     const loginModule = Login();
-    const NavbarModule = Navbar();
+    const NavbarModule = Navbar("reportlist");
     if (!loginModule.regainLoginUser()) {
       router.push({
         name: "signIn",

@@ -1,7 +1,7 @@
 import navTag from "@/api/global/navTag.js"
 import { ref, watch } from "vue"
-export default function navbar() {
-    const showTypeRef = ref("reportList".toLowerCase());
+export default function navbar(initialValue) {
+    const showTypeRef = ref(initialValue);
     const changeTag = (reName) => {
         navTag.value = reName
     }
