@@ -120,6 +120,9 @@ export default {
             const { data } = await instance.get(url, {
                 lock
             })
+            console.group(`%c lockCredential`, 'color:yellow');
+            console.log(data);
+            console.groupEnd();
             return data
         } catch (error) {
             console.error(`error : ${error}`);
