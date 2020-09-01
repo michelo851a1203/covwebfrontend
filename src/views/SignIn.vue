@@ -23,7 +23,7 @@
         />
       </div>
       <div class="w-4/5 mb-4 flex items-center">
-        <div>
+        <div class="w-full">
           <input
             v-model.lazy.trim="password"
             class="w-full bg-gray-300 px-4 py-2 focus:outline-none rounded"
