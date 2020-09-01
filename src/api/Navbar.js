@@ -1,4 +1,5 @@
 import navTag from "@/api/global/navTag.js"
+import CredentialRequest from "@/api/request/Credential.js"
 import { ref, watch } from "vue"
 export default function navbar({ initial, role }) {
     const showTypeRef = ref(initial);
@@ -54,6 +55,14 @@ export default function navbar({ initial, role }) {
                 break;
             default:
                 break;
+        }
+    })
+
+    watch(credStatusName, async (val) => {
+        const iData = val === "Disable Credential" ? true : false
+        const response = await CredentialRequest.lockCredential(iData)
+        if (!response.success) {
+            
         }
     })
 
