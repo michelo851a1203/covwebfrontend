@@ -65,8 +65,9 @@ export default {
         .decodeOnceFromVideoDevice(deviceId, video.value)
         .then((qrcodeObject) => {
           if (!qrcodeObject || qrcodeObject.text === "") {
-            console.error("qrcodeObject and qrcodeObject.text is empty");
-            return;
+            return new Promise((res, err) => {
+              err("qrcodeObject and qrcodeObject.text is empty");
+            });
           }
           verificationModule.verifyCredentialId.value = qrcodeObject.text;
           if (scanRole === 1) {
