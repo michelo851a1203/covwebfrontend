@@ -18,7 +18,7 @@ import alertmobile from "@/components/Alertmobile.vue";
 import router from "@/router";
 import config from "@/api/request/config.js";
 import navTag from "@/api/global/navTag.js";
-import { ref, watch } from "vue";
+import { ref, watch, onUnmounted } from "vue";
 import { BrowserQRCodeReader } from "@zxing/library";
 
 export default {
@@ -106,6 +106,9 @@ export default {
         .catch((err) => {
           console.error(err);
         });
+    });
+    onUnmounted(() => {
+      codeReader.reset();
     });
     return { ...verificationModule, alertComponent, video };
   },
