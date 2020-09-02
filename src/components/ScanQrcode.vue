@@ -6,7 +6,7 @@
       :currentstatus="currentVerifyStatus"
       :is="alertComponent"
     ></component>
-    <video class="border border-black w-full h-full" ref="video"></video>
+    <video class="w-full h-full" ref="video"></video>
   </div>
 </template>
 
