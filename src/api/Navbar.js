@@ -62,7 +62,7 @@ export default function navbar({ initial, role }) {
         const iData = val === "Disable Credential" ? true : false
         const response = await CredentialRequest.lockCredential(iData)
         if (!response.success) {
-            
+            console.log("success");
         }
     })
 
