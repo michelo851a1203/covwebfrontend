@@ -4,11 +4,11 @@
       <div class="py-2">
         <table class="text-sm">
           <tr v-for="item in Object.keys(mainThemeResult)" :key="item">
-            <th class="text-left px-3 py-1">{{ item }}</th>
-            <td class="text-left text-blue-400 px-3 py-1">{{ verifyResult[item] }}</td>
+            <th class="border text-left px-3 py-1">{{ item }}</th>
+            <td class="border text-left text-blue-400 px-3 py-1">{{ verifyResult[item] }}</td>
           </tr>
           <tr v-if="Object.keys(proofAttribute).length > 0">
-            <th class="px-3 py-1 text-center border">attributes</th>
+            <th colspan="2" class="px-3 py-1 text-center border">attributes</th>
           </tr>
           <tr v-for="item in Object.keys(proofAttribute)" :key="item">
             <th class="text-left px-3 py-1 border">{{ item }}</th>
