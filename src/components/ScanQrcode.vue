@@ -7,6 +7,13 @@
       :is="alertComponent"
     ></component>
     <video class="w-full h-full" ref="video"></video>
+    <input
+      ref="inputRef"
+      type="file"
+      :src="srcRef"
+      @change="getCameraChange"
+      accept="image/*;capture=camera"
+    />
   </div>
 </template>
 
@@ -31,6 +38,7 @@ export default {
     const LoginModule = Login();
     const verificationModule = Verification();
     const alertComponent = ref("alert");
+    const inputRef = ref(null);
     if (config.mobileCheck()) {
       alertComponent.value = "alertmobile";
     }
@@ -45,10 +53,84 @@ export default {
     const cameraRef = ref("");
     const video = ref(null);
     navTag.value = "scanQrcode";
+
+    const filereaderToVideo = (file) => {
+      return new promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsArrayBuffer(file);
+        reader.onload = (event) => {
+          const buffer = event.target.result;
+          const videoBlob = new Blob([new Uint8Array(buffer)], {
+            type: "video/mp4",
+          });
+          const url = window.URL.createObjectURL(videoBlob);
+          video.value.src = url;
+          resolve(video.value);
+        };
+        reader.onerror = () => {
+          reject(`fileReader error`);
+        };
+      });
+    };
+
+    const getCameraChange = async (event) => {
+      const mainFileList = event.target.files;
+      if (mainFileList.length === 0) {
+        return;
+      }
+      filereaderToVideo(mainFileList[0])
+        .then((video) => {
+          return codeReader.decodeFromVideo(video);
+        })
+        .then((qrcodeResult) => {
+          if (!qrcodeResult || qrcodeResult.text === "") {
+            return new Promise((resolve, reject) => {
+              reject("qrcodeObject and qrcodeObject.text is empty");
+            });
+          }
+          verificationModule.verifyCredentialId.value = qrcodeObject.text;
+          if (scanRole === 1) {
+            return verificationModule.userScanQrcode();
+          }
+          if (scanRole === 2) {
+            return verificationModule.sendVerify();
+          }
+          return new Promise((res, err) => {
+            err("no role error");
+          });
+        })
+        .then((oResult) => {
+          if (!oResult.success) {
+            verificationModule.normalVerifyAlert({
+              title: oResult.msg,
+              status: "fail",
+            });
+            return;
+          }
+          switch (scanRole) {
+            case 1:
+              verificationModule.normalVerifyAlert({
+                title: "send success",
+                status: "ok",
+              });
+              break;
+            case 2:
+              router.push("/verifyreport");
+              break;
+            default:
+              break;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
     codeReader
       .listVideoInputDevices()
       .then((videoInputDevices) => {
         if (videoInputDevices.length === 0) {
+          inputRef.value.click();
           return;
         }
         cameraRef.value = videoInputDevices[0].deviceId;
@@ -110,7 +192,13 @@ export default {
     onUnmounted(() => {
       codeReader.reset();
     });
-    return { ...verificationModule, alertComponent, video };
+    return {
+      inputRef,
+      ...verificationModule,
+      getCameraChange,
+      alertComponent,
+      video,
+    };
   },
 };
 </script>
