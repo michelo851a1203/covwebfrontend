@@ -6,6 +6,12 @@
       :currentstatus="currentVerifyStatus"
       :is="alertComponent"
     ></component>
+    <div class="w-4/5 mx-auto mb-10 sm:mb-1">
+      <button
+        @click="cameraClick"
+        class="w-full bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
+      >scanQrcode(or file)</button>
+    </div>
     <video class="w-full h-full" ref="video"></video>
     <input
       ref="inputRef"
@@ -39,7 +45,6 @@ export default {
     const LoginModule = Login();
     const verificationModule = Verification();
     const alertComponent = ref("alert");
-    const inputRef = ref(null);
     if (config.mobileCheck()) {
       alertComponent.value = "alertmobile";
     }
@@ -49,6 +54,7 @@ export default {
       });
     }
 
+    const inputRef = ref(null);
     const scanRole = LoginModule.userData.role;
     const codeReader = new BrowserQRCodeReader();
     const cameraRef = ref("");
@@ -131,7 +137,6 @@ export default {
       .listVideoInputDevices()
       .then((videoInputDevices) => {
         if (videoInputDevices.length === 0) {
-          cameraRef.value = "input";
           return;
         }
         cameraRef.value = videoInputDevices[0].deviceId;
@@ -142,11 +147,6 @@ export default {
 
     watch(cameraRef, (deviceId) => {
       if (deviceId === "") {
-        return;
-      }
-      if (deviceId === "input") {
-        const fileInput = inputRef.value;
-        fileInput.click();
         return;
       }
       codeReader
@@ -195,12 +195,17 @@ export default {
           console.error(err);
         });
     });
+    const cameraClick = () => {
+      inputRef.value.click();
+    };
+
     onUnmounted(() => {
       codeReader.reset();
     });
     return {
       ...verificationModule,
       inputRef,
+      cameraClick,
       getCameraChange,
       alertComponent,
       video,
