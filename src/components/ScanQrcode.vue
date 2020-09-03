@@ -9,6 +9,7 @@
     <video class="w-full h-full" ref="video"></video>
     <input
       ref="inputRef"
+      class="hidden"
       type="file"
       :src="srcRef"
       @change="getCameraChange"
@@ -130,7 +131,7 @@ export default {
       .listVideoInputDevices()
       .then((videoInputDevices) => {
         if (videoInputDevices.length === 0) {
-          inputRef.value.click();
+          cameraRef.value = "input";
           return;
         }
         cameraRef.value = videoInputDevices[0].deviceId;
@@ -141,6 +142,11 @@ export default {
 
     watch(cameraRef, (deviceId) => {
       if (deviceId === "") {
+        return;
+      }
+      if (deviceId === "input") {
+        const fileInput = inputRef.value;
+        fileInput.click();
         return;
       }
       codeReader
@@ -193,8 +199,8 @@ export default {
       codeReader.reset();
     });
     return {
-      inputRef,
       ...verificationModule,
+      inputRef,
       getCameraChange,
       alertComponent,
       video,
