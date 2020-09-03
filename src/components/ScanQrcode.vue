@@ -55,7 +55,7 @@ export default {
     navTag.value = "scanQrcode";
 
     const filereaderToVideo = (file) => {
-      return new promise((resolve, reject) => {
+      return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsArrayBuffer(file);
         reader.onload = (event) => {
@@ -82,8 +82,8 @@ export default {
         .then((video) => {
           return codeReader.decodeFromVideo(video);
         })
-        .then((qrcodeResult) => {
-          if (!qrcodeResult || qrcodeResult.text === "") {
+        .then((qrcodeObject) => {
+          if (!qrcodeObject || qrcodeObject.text === "") {
             return new Promise((resolve, reject) => {
               reject("qrcodeObject and qrcodeObject.text is empty");
             });
