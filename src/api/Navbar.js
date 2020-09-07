@@ -67,9 +67,6 @@ export default function navbar({ initial, role }) {
     })
 
     const triggerEnableCredential = () => {
-        if (window.innerWidth <= 640) {
-            return
-        }
         const statusA = "Disable Credential"
         const statusB = "Enable Credential"
         credStatusName.value = credStatusName.value === statusA ? statusB : statusA

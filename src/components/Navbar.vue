@@ -33,15 +33,34 @@
         >
           <label for>{{ credStatusName }}</label>
         </button>
-        <label class="switch inline-block sm:hidden">
-          <input
-            type="checkbox"
-            true-value="Disable Credential"
-            false-value="Enable Credential"
-            v-model="credStatusName"
-          />
-          <span class="slider round"></span>
-        </label>
+        <svg
+          v-if="credStatusName === 'Disable Credential'"
+          class="w-6 sm:hidden"
+          x="0px"
+          y="0px"
+          viewBox="0 0 1000 1000"
+        >
+          <g>
+            <path
+              d="M321.8,455.5h356.4V321.8c0-49.2-17.4-91.2-52.2-126c-34.8-34.8-76.8-52.2-126-52.2c-49.2,0-91.2,17.4-126,52.2c-34.8,34.8-52.2,76.8-52.2,126L321.8,455.5L321.8,455.5z M900.9,522.3v400.9c0,18.6-6.5,34.3-19.5,47.3c-13,13-28.8,19.5-47.3,19.5H165.9c-18.6,0-34.3-6.5-47.3-19.5c-13-13-19.5-28.8-19.5-47.3V522.3c0-18.6,6.5-34.3,19.5-47.3c13-13,28.8-19.5,47.3-19.5h22.3V321.8c0-85.4,30.6-158.7,91.9-219.9C341.3,40.7,414.7,10,500,10c85.3,0,158.7,30.6,219.9,91.9c61.3,61.3,91.9,134.6,91.9,219.9v133.6h22.3c18.6,0,34.3,6.5,47.3,19.5C894.4,488,900.9,503.7,900.9,522.3L900.9,522.3z"
+            />
+          </g>
+        </svg>
+        <svg
+          v-if="credStatusName === 'Enable Credential'"
+          class="w-8 sm:hidden"
+          x="0px"
+          y="0px"
+          viewBox="0 0 24 24"
+        >
+          <g transform="matrix(1 0 0 -1 0 1638)">
+            <path
+              d="M16.5,1630.688h-2.484c0,0.734-0.168,1.305-0.504,1.711s-0.848,0.609-1.535,0.609c-1.336,0-2.004-0.777-2.004-2.332v-2.801
+            h8.578v-9.07H7.125c-0.461,0-0.855,0.164-1.184,0.492s-0.492,0.727-0.492,1.195v7.383H7.5v2.812c0,1.406,0.43,2.594,1.289,3.562
+            s1.93,1.453,3.211,1.453s2.352-0.484,3.211-1.453S16.5,1632.094,16.5,1630.688z"
+            />
+          </g>
+        </svg>
       </div>
       <div :class="{'ml-auto' : getnavRole === 3,'ml-auto sm:ml-0':getnavRole === 2}" class="mr-10">
         <button @click="logout" class="text-black hover:underline text-lg font-medium py-1 px-2">
