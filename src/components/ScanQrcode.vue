@@ -17,7 +17,6 @@
       ref="inputRef"
       class="hidden"
       type="file"
-      :src="srcRef"
       @change="getCameraChange"
       accept="image/*;capture=camera"
     />

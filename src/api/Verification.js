@@ -56,6 +56,14 @@ export default function Verification() {
     })
 
     const proofAttribute = computed(() => {
+        if (!verifyResult["policy"]
+            || !verifyResult["policy"].attributes
+            || !verifyResult["policy"].attributes.length === 0
+            || !verifyResult["policy"].attributes[0]
+            || !verifyResult["policy"].attributes[0].policyName
+        ) {
+            return []
+        }
         const mainKey = verifyResult["policy"].attributes[0].policyName
         return verifyResult["proof"][mainKey].attributes
     })
@@ -116,7 +124,7 @@ export default function Verification() {
         }
         currentVerifyStatus.value.title = "Loading..."
         currentVerifyStatus.value.status = "loading"
-        console.group(`%c verifyCredentialId.value`,'color:yellow');
+        console.group(`%c verifyCredentialId.value`, 'color:yellow');
         console.log(verifyCredentialId.value);
         console.groupEnd();
         const response = await VerificationModules.UserVerification(verifyCredentialId.value)

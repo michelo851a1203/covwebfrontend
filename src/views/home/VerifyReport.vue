@@ -96,6 +96,14 @@ export default {
       console.error("login in success but not get role");
     }
 
+    if (verificationModule.verifyResult._id === "") {
+      router.push("/scan");
+    }
+
+    if (Object.keys(verificationModule.verifyResult.proof).length === 0) {
+      router.push("/scan");
+    }
+
     const reportRole = ref(-1);
     reportRole.value = loginModule.userData.role;
     if (reportRole.value !== 2) {
